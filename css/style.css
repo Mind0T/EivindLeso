@@ -1,0 +1,338 @@
+/* ======== CONFIGURACIÓN GENERAL Y VARIABLES ======== */
+:root {
+    --color-primario: #1a1a1a; /* Negro profundo */
+    --color-secundario: #f4f4f4; /* Blanco hueso */
+    /* CAMBIO: Se actualiza el color de acento al azul solicitado */
+    --color-acento: #0b3e78; 
+    /* CAMBIO: Se actualiza la tipografía */
+    --fuente-titulos: 'Montserrat', sans-serif;
+    --fuente-texto: 'Helvetica', 'Arial', sans-serif; /* Helvetica con respaldo en Arial */
+}
+
+/* CAMBIO: Se ajusta la importación de Google Fonts solo para Montserrat con más grosores */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* Para el desplazamiento suave del menú */
+}
+
+body {
+    font-family: var(--fuente-texto);
+    background-color: var(--color-primario);
+    color: var(--color-secundario);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+}
+
+h1, h2, h3 {
+    font-family: var(--fuente-titulos);
+    color: var(--color-secundario);
+    font-weight: 700; /* Usar un grosor más marcado para los títulos */
+}
+
+/* ======== HEADER / NAVEGACIÓN ======== */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    transition: background 0.3s ease;
+}
+
+header:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+header .logo img {
+    height: 50px;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+header nav a {
+    text-decoration: none;
+    color: var(--color-secundario);
+    font-family: 'Montserrat', sans-serif; /* Usar Montserrat para el menú */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+header nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-acento);
+    transition: width 0.3s ease;
+}
+
+header nav a:hover::after {
+    width: 100%;
+}
+
+/* ======== SECCIÓN HOME (HERO & CARRUSEL) ======== */
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../img/carrusel/carru1.jpg');
+    background-size: cover;
+    background-position: center;
+    animation: carousel-fade 15s infinite;
+    z-index: -1;
+}
+
+.hero::before { /* Capa oscura para legibilidad */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.hero-text {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-text h1 {
+    font-size: 3.5rem;
+    font-weight: 900; /* El grosor más alto para la frase principal */
+    margin-bottom: 1rem;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    color: var(--color-secundario);
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Animación del carrusel (CSS puro) */
+@keyframes carousel-fade {
+    0%, 25% { background-image: url('../img/carrusel/carru1.jpg'); }
+    33%, 58% { background-image: url('../img/carrusel/carru2.jpg'); }
+    66%, 92% { background-image: url('../img/carrusel/carru3.jpg'); }
+    100% { background-image: url('../img/carrusel/carru4.jpg'); }
+}
+
+
+/* ======== SECCIÓN TRABAJO (GALERÍA) ======== */
+#trabajo {
+    background-color: #111;
+}
+
+#trabajo h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+}
+
+.filtros {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.filtro-btn {
+    background: none;
+    border: 1px solid var(--color-acento);
+    color: var(--color-acento);
+    padding: 0.5rem 1.5rem;
+    margin: 0 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.filtro-btn.active, .filtro-btn:hover {
+    background: var(--color-acento);
+    color: var(--color-secundario); /* Texto blanco sobre fondo azul */
+}
+
+.galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.galeria-item {
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+
+.galeria-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.galeria-item:hover img {
+    transform: scale(1.1);
+    filter: brightness(0.7);
+}
+
+/* ======== SECCIÓN SOBRE MÍ ======== */
+.about-container {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.about-texto {
+    flex: 1;
+}
+
+.about-texto h3 {
+    color: var(--color-acento);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.about-texto h2 {
+    font-size: 2.8rem;
+    margin: 0.5rem 0 1.5rem;
+}
+
+.about-imagen {
+    flex: 1;
+    max-width: 450px;
+    position: relative;
+}
+
+.about-imagen img {
+    width: 100%;
+    display: block;
+    border-radius: 5px;
+}
+
+.logo-superpuesto {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 100px;
+    opacity: 0.8;
+    background: rgba(0,0,0,0.4);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* ======== SECCIÓN CONTACTO ======== */
+#contacto {
+    background-color: #111;
+    text-align: center;
+}
+#contacto h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+.links-contacto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.link-item {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid var(--color-secundario);
+    text-decoration: none;
+    color: var(--color-secundario);
+    font-size: 1.2rem;
+    font-family: 'Montserrat', sans-serif; /* Usar Montserrat también aquí para consistencia */
+    font-weight: 700;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+.link-item:hover {
+    background-color: var(--color-acento);
+    color: var(--color-secundario); /* Texto blanco sobre fondo azul */
+    border-color: var(--color-acento);
+    transform: scale(1.05);
+}
+
+.link-item i {
+    margin-right: 1rem;
+}
+
+/* ======== FOOTER ======== */
+footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid #333;
+}
+
+/* ======== DISEÑO RESPONSIVO (PARA MÓVILES) ======== */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 0.5rem;
+    }
+    header nav ul {
+        gap: 1rem;
+        padding-top: 0.5rem;
+    }
+    
+    .hero-text h1 {
+        font-size: 2.5rem;
+    }
+
+    .about-container {
+        flex-direction: column;
+    }
+
+    .about-imagen {
+        margin-top: 2rem;
+    }
+}

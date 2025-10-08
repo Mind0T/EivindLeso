@@ -1,11 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EivindLeso</title>
+    <title>Tu Nombre | Fotografía</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
 </head>
 <body>
-    
+
+    <header>
+        <div class="logo">
+            <a href="#home">
+                <img src="img/logo2.png" alt="Logotipo">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#trabajo">Trabajo</a></li>
+                <li><a href="#sobre-mi">Sobre mí</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="carousel-container">
+                </div>
+            <div class="hero-text">
+                <h1>"Capturando la luz, creando arte."</h1>
+                <p>Fotografía que cuenta tu historia.</p>
+            </div>
+        </section>
+
+        <section id="trabajo">
+            <div class="container">
+                <h2>Mi Trabajo</h2>
+                <div class="filtros">
+                    <button class="filtro-btn active" data-filter="all">Todo</button>
+                    <button class="filtro-btn" data-filter="retrato">Retrato</button>
+                    <button class="filtro-btn" data-filter="aerea">Foto Aérea</button>
+                    <button class="filtro-btn" data-filter="moda">Moda</button>
+                    <button class="filtro-btn" data-filter="sociales">Sociales</button>
+                </div>
+                <div class="galeria-grid">
+                    <div class="galeria-item" data-category="retrato"><img src="img/trabajo/retrato1.jpg" alt="Foto de Retrato"></div>
+                    <div class="galeria-item" data-category="moda"><img src="img/trabajo/moda1.jpg" alt="Foto de Moda"></div>
+                    <div class="galeria-item" data-category="aerea"><img src="img/trabajo/aerea1.jpg" alt="Foto Aérea"></div>
+                    <div class="galeria-item" data-category="aerea"><img src="img/trabajo/aerea2.jpg" alt="Foto Aérea"></div>
+                    <div class="galeria-item" data-category="sociales"><img src="img/trabajo/sociales1.jpg" alt="Foto de Evento Social"></div>
+                    <div class="galeria-item" data-category="retrato"><img src="img/trabajo/retrato2.jpg" alt="Foto de Retrato"></div>
+                    <div class="galeria-item" data-category="moda"><img src="img/trabajo/moda2.jpg" alt="Foto de Moda"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sobre-mi">
+            <div class="container about-container">
+                <div class="about-texto">
+                    <h3>Sobre Mí</h3>
+                    <h2>Soy Eivind Leso</h2>
+                    <p>Fotógrafo con 5 años de experiencia y una visión en constante evolución. Egresado de la Escuela Activa de Fotografía, mi especialidad es la versatilidad: creo narrativas visuales potentes en distintos géneros fotográficos.</p>
+                    <p>Actualmente fusiono mi pasión por la imagen con mis estudios en Ingeniería en Inteligencia Artificial, explorando nuevas tecnologías para llevar la creatividad al siguiente nivel. Busco proyectos que desafíen los límites entre lo artístico y lo tecnológico.</p>
+                </div>
+                <div class="about-imagen">
+                    <img src="img/mi-foto.jpg" alt="Foto de IrvinSoriano">
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto">
+            <div class="container">
+                <h2>Conectemos</h2>
+                <p>Encuéntrame en mis redes y empecemos a crear algo increíble juntos.</p>
+                <div class="links-contacto">
+                    <a href="https://www.instagram.com/eivindleso" target="_blank" class="link-item">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </a>
+                    <a href="https://www.youtube.com/@Synthgraf_IA" target="_blank" class="link-item">
+                        <i class="fab fa-youtube"></i> YouTube
+                    </a>
+                    <a href="https://www.tiktok.com/@d0tm1nd" target="_blank" class="link-item">
+                        <i class="fab fa-tiktok"></i> TikTok
+                    </a>
+                    <a href="mailto:irving.soriano31@gmail.com" class="link-item">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                    <a href="https://github.com/Mind0T" target="_blank" class="link-item">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="https://www.linkedin.com/in/irving-soriano/" target="_blank" class="link-item">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Eivind Leso Fotografía. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
