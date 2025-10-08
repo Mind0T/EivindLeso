@@ -103,7 +103,6 @@ header nav a:hover::after {
     overflow: hidden;
 }
 
-/* --- ESTILOS ACTUALIZADOS PARA CARRUSEL CON FUNDIDO --- */
 .carousel-container {
     position: absolute;
     top: 0;
@@ -113,7 +112,6 @@ header nav a:hover::after {
     z-index: -1;
 }
 
-/* Las imágenes se apilan una sobre otra */
 .carousel-image {
     position: absolute;
     top: 0;
@@ -121,16 +119,14 @@ header nav a:hover::after {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0; /* Ocultas por defecto */
-    transition: opacity 0.8s ease-in-out; /* Animación de fundido */
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
 }
 
-/* La imagen activa se hace visible */
 .carousel-image.active {
     opacity: 1;
 }
 
-/* Durante la transición, la imagen activa se desvanece */
 .carousel-container.transitioning .carousel-image.active {
     opacity: 0;
 }
@@ -162,8 +158,6 @@ header nav a:hover::after {
     right: 10px;
     border-radius: 5px 0 0 5px;
 }
-/* --- Fin de estilos de carrusel con fundido --- */
-
 
 .hero::before {
     content: '';
@@ -294,13 +288,25 @@ header nav a:hover::after {
     background-color: rgba(0, 0, 0, 0.9);
     justify-content: center;
     align-items: center;
+    padding: 20px;
 }
+
+.lightbox-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .lightbox-contenido {
-    max-width: 90%;
-    max-height: 80vh;
+    max-width: 100%;
+    max-height: 100%;
     animation: zoomIn 0.3s ease;
     object-fit: contain;
 }
+
 .lightbox-cerrar {
     position: absolute;
     top: 15px;
@@ -309,31 +315,30 @@ header nav a:hover::after {
     font-size: 40px;
     font-weight: bold;
     cursor: pointer;
+    z-index: 2;
 }
 
 .lightbox-prev, .lightbox-next {
     cursor: pointer;
     position: absolute;
     top: 50%;
+    transform: translateY(-50%);
     width: auto;
     padding: 16px;
-    margin-top: -50px;
     color: white;
     font-weight: bold;
     font-size: 20px;
     transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
+    border-radius: 3px;
     user-select: none;
     -webkit-user-select: none;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.4);
 }
 .lightbox-prev {
-    left: 0;
-    border-radius: 3px 0 0 3px;
+    left: 20px;
 }
 .lightbox-next {
-    right: 0;
-    border-radius: 0 3px 3px 0;
+    right: 20px;
 }
 .lightbox-prev:hover, .lightbox-next:hover {
     background-color: rgba(0,0,0,0.8);
@@ -353,6 +358,10 @@ header nav a:hover::after {
 
 .about-texto {
     flex: 1;
+}
+
+.about-texto p {
+    text-align: justify;
 }
 
 .about-texto h3 {
@@ -398,25 +407,26 @@ header nav a:hover::after {
     font-size: 2.5rem;
     margin-bottom: 1rem;
 }
+
 .links-contacto {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
     margin-top: 3rem;
-    max-width: 600px;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
 }
 
 .link-item {
-    display: block;
-    width: 100%;
+    flex-grow: 1;
+    flex-basis: 200px;
     padding: 1rem;
     border: 2px solid var(--color-secundario);
     text-decoration: none;
     color: var(--color-secundario);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     transition: all 0.3s ease;
@@ -430,8 +440,69 @@ header nav a:hover::after {
 }
 
 .link-item i {
-    margin-right: 1rem;
+    margin-right: 0.8rem;
 }
+
+/* --- Estilos del Formulario de Contacto --- */
+.contact-form-container {
+    max-width: 800px;
+    margin: 4rem auto 0;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--color-secundario);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background-color: #222;
+    border: 2px solid #444;
+    border-radius: 5px;
+    color: var(--color-secundario);
+    font-family: 'Helvetica', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-acento);
+}
+
+.btn-enviar {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--color-acento);
+    color: var(--color-secundario);
+    border: none;
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-enviar:hover {
+    background-color: #0f4a8f;
+    transform: translateY(-2px);
+}
+/* --- Fin de estilos del formulario --- */
+
 
 footer {
     text-align: center;
@@ -462,10 +533,9 @@ footer {
     }
     .lightbox-prev, .lightbox-next {
         padding: 10px;
-        margin-top: -30px;
         font-size: 16px;
     }
     .galeria-placeholder img {
-        max-width: 300px; /* Ajuste para móviles */
+        max-width: 300px;
     }
 }

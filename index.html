@@ -28,12 +28,11 @@
     <main>
         <section id="home" class="hero">
             <div class="carousel-container">
-                <div class="carousel-track">
-                    <img src="img/carrusel/carru1.jpg" alt="Imagen Carrusel 1" class="carousel-image active">
-                    <img src="img/carrusel/carru2.jpg" alt="Imagen Carrusel 2" class="carousel-image">
-                    <img src="img/carrusel/carru3.jpg" alt="Imagen Carrusel 3" class="carousel-image">
-                    <img src="img/carrusel/carru4.jpg" alt="Imagen Carrusel 4" class="carousel-image">
-                </div>
+                <img src="img/carrusel/carru1.jpg" alt="Imagen Carrusel 1" class="carousel-image active">
+                <img src="img/carrusel/carru2.jpg" alt="Imagen Carrusel 2" class="carousel-image">
+                <img src="img/carrusel/carru3.jpg" alt="Imagen Carrusel 3" class="carousel-image">
+                <img src="img/carrusel/carru4.jpg" alt="Imagen Carrusel 4" class="carousel-image">
+                
                 <button class="carousel-control prev" aria-label="Anterior">&#10094;</button>
                 <button class="carousel-control next" aria-label="Siguiente">&#10095;</button>
             </div>
@@ -87,8 +86,6 @@
                     <div class="galeria-item" data-category="docu"><img src="img/trabajo/docu5.jpg" alt="Macrofotografía"></div>
                     <div class="galeria-item" data-category="docu"><img src="img/trabajo/docu6.jpg" alt="Macrofotografía"></div>
                     
-                    
-                    
                     <div class="galeria-item video-container" data-category="videos">
                         <iframe src="https://www.youtube.com/embed/oz-Y1dcWf9U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
@@ -113,14 +110,31 @@
         <section id="contacto">
             <div class="container">
                 <h2>Conectemos</h2>
-                <p>Encuéntrame en mis redes y empecemos a crear algo increíble juntos.</p>
+                <p>Encuéntrame en mis redes o envíame un mensaje a continuación.</p>
                 <div class="links-contacto">
                     <a href="https://www.instagram.com/eivindleso" target="_blank" class="link-item"><i class="fab fa-instagram"></i> Instagram</a>
                     <a href="https://www.youtube.com/@Synthgraf_IA" target="_blank" class="link-item"><i class="fab fa-youtube"></i> YouTube</a>
                     <a href="https://www.tiktok.com/@d0tm1nd" target="_blank" class="link-item"><i class="fab fa-tiktok"></i> TikTok</a>
-                    <a href="mailto:irving.soriano31@gmail.com" class="link-item"><i class="fas fa-envelope"></i> Email</a>
                     <a href="https://github.com/Mind0T" target="_blank" class="link-item"><i class="fab fa-github"></i> GitHub</a>
                     <a href="https://www.linkedin.com/in/irving-soriano/" target="_blank" class="link-item"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                </div>
+
+                <div class="contact-form-container">
+                    <form action="https://formspree.io/f/xovknlbb" method="POST">
+                        <div class="form-group">
+                            <label for="name">Nombre:</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Tu Correo:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensaje:</label>
+                            <textarea id="message" name="message" rows="6" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-enviar">Enviar Mensaje</button>
+                    </form>
                 </div>
             </div>
         </section>
@@ -132,9 +146,11 @@
 
     <div id="lightbox" class="lightbox">
         <span class="lightbox-cerrar">&times;</span>
-        <img class="lightbox-contenido" id="lightbox-img">
-        <a class="lightbox-prev">&#10094;</a>
-        <a class="lightbox-next">&#10095;</a>
+        <div class="lightbox-wrapper">
+            <img class="lightbox-contenido" id="lightbox-img">
+            <a class="lightbox-prev">&#10094;</a>
+            <a class="lightbox-next">&#10095;</a>
+        </div>
     </div>
 
     <script src="js/script.js"></script>
