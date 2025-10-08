@@ -104,6 +104,6 @@ El sitio está alojado en **Vercel**, integrado directamente con GitHub.
 ## 👤 Autor
 
 **Irving Soriano**  
-📂 *Desarrollador Frontend & entusiasta de la IA*  
+📂 *Fotografo y estudiante de Ing en Inteligencia Artificial*  
 - GitHub: [@Mind0T](https://github.com/Mind0T)  
 - LinkedIn: [Irving Soriano](https://www.linkedin.com/in/irving-soriano/)
