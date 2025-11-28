@@ -3,88 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eivind Leso | Fotografía</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Eivind Leso | Fotografía Comercial</title>
+    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <header>
-        <div class="logo">
-            <a href="#home">
-                <img src="img/logo2.png" alt="Logotipo">
-            </a>
+        <div class="header-left">
+            <div class="logo">
+                <a href="#home">
+                    <img src="assets/img/logo2.png" alt="Logotipo Eivind Leso">
+                </a>
+            </div>
         </div>
-        <nav>
+
+        <nav class="nav-menu">
             <ul>
                 <li><a href="#home">Home</a></li>
-                <li><a href="#trabajo">Trabajo</a></li>
-                <li><a href="#sobre-mi">Sobre mí</a></li>
+                <li><a href="#trabajo">Portafolio</a></li>
+                <li><a href="#sobre-mi">Perfil</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
         </nav>
+
+        <div class="header-right">
+            <div class="header-social">
+                <a href="https://www.instagram.com/eivindleso" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/@Synthgraf_IA" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+            <div class="menu-toggle" id="mobile-menu-btn"><i class="fas fa-bars"></i></div>
+        </div>
     </header>
 
     <main>
-        <section id="home" class="hero">
+        <section id="home" class="hero-boxed">
             <div class="carousel-container">
-                <img src="img/carrusel/carru1.jpg" alt="Imagen Carrusel 1" class="carousel-image active">
-                <img src="img/carrusel/carru2.jpg" alt="Imagen Carrusel 2" class="carousel-image">
-                <img src="img/carrusel/carru3.jpg" alt="Imagen Carrusel 3" class="carousel-image">
-                <img src="img/carrusel/carru4.jpg" alt="Imagen Carrusel 4" class="carousel-image">
+                <img src="assets/img/carrusel/carru1.jpg" alt="Fotografía estudio 1" class="carousel-image active">
+                <img src="assets/img/carrusel/carru2.jpg" alt="Fotografía estudio 2" class="carousel-image">
+                <img src="assets/img/carrusel/carru3.jpg" alt="Fotografía estudio 3" class="carousel-image">
+                <img src="assets/img/carrusel/carru4.jpg" alt="Fotografía estudio 4" class="carousel-image">
                 
                 <button class="carousel-control prev" aria-label="Anterior">&#10094;</button>
                 <button class="carousel-control next" aria-label="Siguiente">&#10095;</button>
-            </div>
-            <div class="hero-text">
-                <h1>"Capturando la luz, creando arte."</h1>
-                <p>Fotografía que cuenta tu historia.</p>
             </div>
         </section>
 
         <section id="trabajo">
             <div class="container">
-                <h2>Mi Trabajo</h2>
+                <h2>Portafolio Selecto</h2>
                 <div class="filtros">
-                    <button class="filtro-btn" data-filter="retrato">Retrato</button>
-                    <button class="filtro-btn" data-filter="aerea">Foto Aérea</button>
+                    <button class="filtro-btn active" data-filter="retrato">Retrato</button>
                     <button class="filtro-btn" data-filter="moda">Moda</button>
                     <button class="filtro-btn" data-filter="macro">Macro</button>
-                    <button class="filtro-btn" data-filter="docu">Documental</button>
                     <button class="filtro-btn" data-filter="videos">Videos</button>
                 </div>
+                
                 <div class="galeria-grid">
                     <div class="galeria-placeholder">
-                        <img src="img/logo2.png" alt="Logo Eivind Leso">
-                        <p>Selecciona una categoría para ver mi trabajo</p>
+                        <img src="assets/img/logo2.png" alt="Logo Eivind Leso">
+                        <p>Explora las categorías visuales</p>
                     </div>
 
-                    <div class="galeria-item" data-category="retrato"><img src="img/trabajo/retrato1.jpg" alt="Foto de Retrato"></div>
-                    <div class="galeria-item" data-category="retrato"><img src="img/trabajo/retrato2.jpg" alt="Foto de Retrato"></div>
-                    <div class="galeria-item" data-category="retrato"><img src="img/trabajo/retrato3.jpg" alt="Foto de Retrato"></div>
-                    <div class="galeria-item" data-category="retrato"><img src="img/trabajo/retrato4.jpg" alt="Foto de Retrato"></div>
-                    <div class="galeria-item" data-category="retrato"><img src="img/trabajo/retrato5.jpg" alt="Foto de Retrato"></div>
-                    <div class="galeria-item" data-category="retrato"><img src="img/trabajo/retrato6.jpg" alt="Foto de Retrato"></div>
-                    <div class="galeria-item" data-category="moda"><img src="img/trabajo/moda1.jpg" alt="Foto de Moda"></div>
-                    <div class="galeria-item" data-category="moda"><img src="img/trabajo/moda2.jpg" alt="Foto de Moda"></div>
-                    <div class="galeria-item" data-category="moda"><img src="img/trabajo/moda3.jpg" alt="Foto de Moda"></div>
-                    <div class="galeria-item" data-category="moda"><img src="img/trabajo/moda4.jpg" alt="Foto de Moda"></div>
-                    <div class="galeria-item" data-category="moda"><img src="img/trabajo/moda5.jpg" alt="Foto de Moda"></div>
-                    <div class="galeria-item" data-category="moda"><img src="img/trabajo/moda6.jpg" alt="Foto de Moda"></div>
-                    <div class="galeria-item" data-category="aerea"><img src="img/trabajo/aerea1.jpg" alt="Foto Aérea"></div>
-                    <div class="galeria-item" data-category="aerea"><img src="img/trabajo/aerea2.jpg" alt="Foto Aérea"></div>
-                    <div class="galeria-item" data-category="macro"><img src="img/trabajo/macro1.jpg" alt="Macrofotografía"></div>
-                    <div class="galeria-item" data-category="macro"><img src="img/trabajo/macro2.jpg" alt="Macrofotografía"></div>
-                    <div class="galeria-item" data-category="macro"><img src="img/trabajo/macro3.jpg" alt="Macrofotografía"></div>
-                    <div class="galeria-item" data-category="macro"><img src="img/trabajo/macro4.jpg" alt="Macrofotografía"></div>
-                    <div class="galeria-item" data-category="macro"><img src="img/trabajo/macro5.jpg" alt="Macrofotografía"></div>
-                    <div class="galeria-item" data-category="macro"><img src="img/trabajo/macro6.jpg" alt="Macrofotografía"></div>
-                    <div class="galeria-item" data-category="docu"><img src="img/trabajo/docu1.jpg" alt="Macrofotografía"></div>
-                    <div class="galeria-item" data-category="docu"><img src="img/trabajo/docu2.jpg" alt="Macrofotografía"></div>
-                    <div class="galeria-item" data-category="docu"><img src="img/trabajo/docu3.jpg" alt="Macrofotografía"></div>
-                    <div class="galeria-item" data-category="docu"><img src="img/trabajo/docu4.jpg" alt="Macrofotografía"></div>
-                    <div class="galeria-item" data-category="docu"><img src="img/trabajo/docu5.jpg" alt="Macrofotografía"></div>
-                    <div class="galeria-item" data-category="docu"><img src="img/trabajo/docu6.jpg" alt="Macrofotografía"></div>
+                    <div class="galeria-item" data-category="retrato"><img src="assets/img/trabajo/retrato1.jpg" alt="Retrato"></div>
+                    <div class="galeria-item" data-category="retrato"><img src="assets/img/trabajo/retrato2.jpg" alt="Retrato"></div>
+                    <div class="galeria-item" data-category="retrato"><img src="assets/img/trabajo/retrato3.jpg" alt="Retrato"></div>
+                    <div class="galeria-item" data-category="retrato"><img src="assets/img/trabajo/retrato4.jpg" alt="Retrato"></div>
+                    <div class="galeria-item" data-category="retrato"><img src="assets/img/trabajo/retrato5.jpg" alt="Retrato"></div>
+                    <div class="galeria-item" data-category="retrato"><img src="assets/img/trabajo/retrato6.jpg" alt="Retrato"></div>
+                    
+                    <div class="galeria-item" data-category="moda"><img src="assets/img/trabajo/moda1.jpg" alt="Moda"></div>
+                    <div class="galeria-item" data-category="moda"><img src="assets/img/trabajo/moda2.jpg" alt="Moda"></div>
+                    <div class="galeria-item" data-category="moda"><img src="assets/img/trabajo/moda3.jpg" alt="Moda"></div>
+                    <div class="galeria-item" data-category="moda"><img src="assets/img/trabajo/moda4.jpg" alt="Moda"></div>
+                    <div class="galeria-item" data-category="moda"><img src="assets/img/trabajo/moda5.jpg" alt="Moda"></div>
+                    <div class="galeria-item" data-category="moda"><img src="assets/img/trabajo/moda6.jpg" alt="Moda"></div>
+                    
+                    <div class="galeria-item" data-category="macro"><img src="assets/img/trabajo/macro1.jpg" alt="Macro"></div>
+                    <div class="galeria-item" data-category="macro"><img src="assets/img/trabajo/macro2.jpg" alt="Macro"></div>
+                    <div class="galeria-item" data-category="macro"><img src="assets/img/trabajo/macro3.jpg" alt="Macro"></div>
+                    <div class="galeria-item" data-category="macro"><img src="assets/img/trabajo/macro4.jpg" alt="Macro"></div>
+                    <div class="galeria-item" data-category="macro"><img src="assets/img/trabajo/macro5.jpg" alt="Macro"></div>
+                    <div class="galeria-item" data-category="macro"><img src="assets/img/trabajo/macro6.jpg" alt="Macro"></div>
                     
                     <div class="galeria-item video-container" data-category="videos">
                         <iframe src="https://www.youtube.com/embed/oz-Y1dcWf9U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -96,44 +97,49 @@
         <section id="sobre-mi">
             <div class="container about-container">
                 <div class="about-texto">
-                    <h3>Sobre Mí</h3>
-                    <h2>Soy Eivind Leso</h2>
-                    <p>Fotógrafo con 5 años de experiencia y una visión en constante evolución. Egresado de la Escuela Activa de Fotografía, mi especialidad es la versatilidad: creo narrativas visuales potentes en distintos géneros fotográficos.</p>
-                    <p>Actualmente fusiono mi pasión por la imagen con mis estudios en Ingeniería en Inteligencia Artificial, explorando nuevas tecnologías para llevar la creatividad al siguiente nivel. Busco proyectos que desafíen los límites entre lo artístico y lo tecnológico.</p>
+                    <h3>Perfil Profesional</h3>
+                    <h2>Eivind Leso</h2>
+                    <p>Soy fotógrafo profesional especializado en la creación de imagen comercial y retrato de estudio. Mi formación académica en la <strong>Escuela Activa de Fotografía</strong> me ha brindado las bases técnicas y artísticas para manipular la luz con intención y precisión.</p>
+                    <p>Actualmente, complemento mi visión creativa con estudios en <strong>Ingeniería en Inteligencia Artificial</strong>. Esta dualidad me permite abordar cada proyecto con un rigor técnico meticuloso y una apertura a las nuevas tecnologías generativas aplicadas a la imagen.</p>
+                    
+                    <div class="street-link-container">
+                        <a href="https://www.eivindstreet.com" target="_blank" class="link-street-text">
+                            Te invito a ver mi trabajo en street photography <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
                 <div class="about-imagen">
-                    <img src="img/mi-foto.jpg" alt="Foto de Eivind Leso">
+                    <img src="assets/img/mi-foto.jpg" alt="Eivind Leso Fotógrafo">
                 </div>
             </div>
         </section>
 
         <section id="contacto">
             <div class="container">
-                <h2>Conectemos</h2>
-                <p>Encuéntrame en mis redes o envíame un mensaje a continuación.</p>
+                <h2>Contacto Directo</h2>
+                <p>Para cotizaciones, bookings y colaboraciones.</p>
                 <div class="links-contacto">
                     <a href="https://www.instagram.com/eivindleso" target="_blank" class="link-item"><i class="fab fa-instagram"></i> Instagram</a>
                     <a href="https://www.youtube.com/@Synthgraf_IA" target="_blank" class="link-item"><i class="fab fa-youtube"></i> YouTube</a>
                     <a href="https://www.tiktok.com/@d0tm1nd" target="_blank" class="link-item"><i class="fab fa-tiktok"></i> TikTok</a>
-                    <a href="https://github.com/Mind0T" target="_blank" class="link-item"><i class="fab fa-github"></i> GitHub</a>
-                    <a href="https://www.linkedin.com/in/irving-soriano/" target="_blank" class="link-item"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="https://wa.me/525583538328?text=Buen%20dia.%20me%20puede%20brindar%20informes%20sobre%3A" target="_blank" class="link-item whatsapp-btn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
                 </div>
 
                 <div class="contact-form-container">
                     <form action="https://formspree.io/f/xovknlbb" method="POST">
                         <div class="form-group">
-                            <label for="name">Nombre:</label>
+                            <label for="name">Nombre / Empresa:</label>
                             <input type="text" id="name" name="name" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Tu Correo:</label>
+                            <label for="email">Correo Electrónico:</label>
                             <input type="email" id="email" name="email" required>
                         </div>
                         <div class="form-group">
-                            <label for="message">Mensaje:</label>
+                            <label for="message">Detalles del Proyecto:</label>
                             <textarea id="message" name="message" rows="6" required></textarea>
                         </div>
-                        <button type="submit" class="btn-enviar">Enviar Mensaje</button>
+                        <button type="submit" class="btn-enviar">Solicitar Cotización</button>
                     </form>
                 </div>
             </div>
@@ -141,7 +147,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2025 Eivind Leso Fotografía. Todos los derechos reservados.</p>
+        <p>&copy; 2025 Eivind Leso. Fotografía & IA.</p>
     </footer>
 
     <div id="lightbox" class="lightbox">
@@ -153,6 +159,6 @@
         </div>
     </div>
 
-    <script src="js/script.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
