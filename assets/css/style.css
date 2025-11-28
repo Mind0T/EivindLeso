@@ -6,7 +6,7 @@
     --color-hover: #888888;
     --color-whatsapp: #25D366;
     --fuente-principal: 'Montserrat', sans-serif;
-    --header-height: 110px; /* Altura estimada del header para compensar el fixed */
+    --header-height: 110px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -18,16 +18,18 @@ body {
     color: var(--color-texto);
     line-height: 1.6;
     font-weight: 300;
-    padding-top: var(--header-height); /* IMPORTANTE: Empuja el contenido para no quedar bajo el header */
+    /* IMPORTANTE: Si quieres que el header traslúcido se vea SOBRE la imagen,
+       podríamos quitar este padding. Por ahora lo dejo para que no se corte el contenido. */
+    padding-top: var(--header-height);
 }
 
 .container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
 h1, h2, h3 { font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--color-acento); }
 
-/* ======== HEADER (FIXED / ESTÁTICO) ======== */
+/* ======== HEADER (TRASLÚCIDO CON DEGRADADO) ======== */
 header {
-    background-color: #000; /* Negro sólido */
-    position: fixed; /* Se queda fijo al hacer scroll */
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(20,20,20,0.9) 100%);
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -36,63 +38,43 @@ header {
     align-items: center;
     padding: 1rem 3rem;
     z-index: 1000;
-    border-bottom: 1px solid #222;
+    border-bottom: none;
     height: var(--header-height);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
-/* Header Izquierdo */
 .header-left { flex: 0 0 auto; }
-.logo img {
-    height: 70px;
-    width: auto;
-    display: block;
-}
+.logo img { height: 70px; width: auto; display: block; }
 
-/* Header Centro: Navegación */
-.nav-menu ul {
-    list-style: none;
-    display: flex;
-    gap: 3rem;
-}
+.nav-menu ul { list-style: none; display: flex; gap: 3rem; }
 .nav-menu a {
-    text-decoration: none;
-    color: var(--color-texto);
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: color 0.3s ease;
+    text-decoration: none; color: var(--color-texto); font-size: 0.95rem;
+    text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s ease;
 }
 .nav-menu a:hover { color: var(--color-acento); }
 
-/* Header Derecha */
 .header-right { display: flex; align-items: center; gap: 1.5rem; }
-.header-social {
-    display: flex; gap: 1.2rem; padding-right: 1rem;
-    border-right: 1px solid #333;
-}
+.header-social { display: flex; gap: 1.2rem; padding-right: 1rem; border-right: 1px solid rgba(255,255,255,0.2); }
 .header-social a { color: #fff; font-size: 1.4rem; transition: color 0.3s; }
 .header-social a:hover { color: var(--color-hover); }
 .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: #fff; }
 
-
-/* ======== HERO BOXED ======== */
+/* ======== HERO BOXED (CARRUSEL) ======== */
 .hero-boxed {
     width: 100%;
-    padding: 2rem 3rem; 
-    height: 85vh; 
+    /* Quitamos padding lateral para que la imagen luzca más limpia y grande */
+    padding: 0; 
+    /* CAMBIO ESCRITORIO: Aumentado de 85vh a 95vh para mayor altura */
+    height: 95vh; 
     position: relative;
 }
 
-.carousel-container {
-    width: 100%; height: 100%; position: relative; overflow: hidden;
-}
-
+.carousel-container { width: 100%; height: 100%; position: relative; overflow: hidden; }
 .carousel-image {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     object-fit: cover; opacity: 0; transition: opacity 1s ease-in-out;
 }
 .carousel-image.active { opacity: 1; }
-
 .carousel-control {
     position: absolute; top: 50%; transform: translateY(-50%);
     background: transparent; color: rgba(255,255,255,0.7);
@@ -102,7 +84,6 @@ header {
 .carousel-control:hover { color: #fff; transform: translateY(-50%) scale(1.1); }
 .carousel-control.prev { left: 10px; }
 .carousel-control.next { right: 10px; }
-
 
 /* ======== PORTAFOLIO ======== */
 #trabajo { background-color: var(--color-fondo); padding-top: 4rem; }
@@ -128,24 +109,20 @@ header {
 }
 .galeria-placeholder {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    text-align: center; opacity: 0.3; pointer-events: none;
-}
-.galeria-placeholder img { width: 100px; margin-bottom: 1rem; filter: invert(1); }
-
-.galeria-item {
-    display: none; overflow: hidden; aspect-ratio: 1 / 1.2; cursor: pointer;
-}
-
-/* --- CORRECCIÓN VIDEO CENTRADO --- */
-.galeria-item.video-container {
-    grid-column: 1 / -1; /* Ocupa toda la fila disponible */
-    aspect-ratio: 16 / 9;
+    text-align: center; opacity: 0.4; pointer-events: none;
     width: 100%;
-    max-width: 900px; /* Ancho máximo para que no se vea gigante */
-    margin: 0 auto; /* Centrado horizontal del bloque */
-    display: block; /* Asegura comportamiento de bloque */
+}
+.galeria-placeholder img { 
+    width: 450px; 
+    max-width: 90%; 
+    margin-bottom: 1rem; 
+    filter: invert(0); 
 }
 
+.galeria-item { display: none; overflow: hidden; aspect-ratio: 1 / 1.2; cursor: pointer; }
+.galeria-item.video-container {
+    grid-column: 1 / -1; aspect-ratio: 16 / 9; width: 100%; max-width: 900px; margin: 0 auto;
+}
 .galeria-item img {
     width: 100%; height: 100%; object-fit: cover;
     transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); filter: grayscale(20%);
@@ -153,39 +130,17 @@ header {
 .galeria-item:hover img { transform: scale(1.05); filter: grayscale(0%); }
 .video-container iframe { width: 100%; height: 100%; }
 
-/* ======== ABOUT (Modificado) ======== */
+/* ======== ABOUT ======== */
 .about-container { display: flex; align-items: center; gap: 4rem; padding: 6rem 2rem; }
 .about-texto { flex: 1; }
 .about-texto h3 { font-size: 1rem; color: #666; margin-bottom: 1rem; }
 .about-texto h2 { font-size: 3rem; margin-bottom: 2rem; color: #fff; }
 .about-texto p { margin-bottom: 1.5rem; font-size: 1.1rem; color: #ccc; font-weight: 300; }
-
-/* Enlace Street Photography Minimalista */
-.street-link-container {
-    margin-top: 2.5rem;
-    padding-top: 2rem;
-    border-top: 1px solid #333;
-}
-.link-street-text {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: 400;
-    transition: color 0.3s;
-    font-style: italic;
-}
-.link-street-text:hover {
-    color: #ccc;
-    text-decoration: underline;
-}
-
+.street-link-container { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid #333; }
+.link-street-text { color: #fff; text-decoration: none; font-size: 1.1rem; font-weight: 400; transition: color 0.3s; font-style: italic; }
+.link-street-text:hover { color: #ccc; text-decoration: underline; }
 .about-imagen { flex: 1; max-width: 400px; }
-.about-imagen img { 
-    width: 100%; 
-    /* filter: grayscale(100%);  <-- ELIMINADO para que salga a color */
-    border-radius: 2px;
-}
-
+.about-imagen img { width: 100%; border-radius: 2px; }
 
 /* ======== CONTACTO ======== */
 #contacto { background-color: #0a0a0a; text-align: center; padding-bottom: 6rem; }
@@ -197,7 +152,6 @@ header {
 .link-item:hover { background: #fff; color: #000; border-color: #fff; }
 .link-item.whatsapp-btn { border-color: var(--color-whatsapp); color: var(--color-whatsapp); }
 .link-item.whatsapp-btn:hover { background-color: var(--color-whatsapp); color: #fff; }
-
 .contact-form-container { max-width: 600px; margin: 4rem auto 0; text-align: left; }
 .form-group label { font-size: 0.9rem; color: #888; margin-bottom: 0.5rem; display: block; }
 .form-group input, .form-group textarea {
@@ -228,7 +182,7 @@ footer { text-align: center; padding: 3rem; background: #000; color: #555; font-
 .lightbox-prev { left: -60px; }
 .lightbox-next { right: -60px; }
 
-/* Responsive */
+/* ======== RESPONSIVE (MÓVIL) ======== */
 @media (max-width: 900px) {
     body { padding-top: 80px; }
     header { height: 80px; padding: 1rem 1.5rem; }
@@ -240,15 +194,17 @@ footer { text-align: center; padding: 3rem; background: #000; color: #555; font-
     }
     .nav-menu.active { height: auto; padding: 2rem 0; border-bottom: 1px solid #333; }
     .nav-menu ul { flex-direction: column; align-items: center; gap: 1.5rem; }
-    
     .header-social { border-right: none; padding-right: 0; }
     .menu-toggle { display: block; margin-left: 1rem; }
     
-    .hero-boxed { padding: 1rem; height: 50vh; }
+    /* CAMBIO MÓVIL: Hacemos el contenedor alto para forzar formato vertical */
+    .hero-boxed { 
+        padding: 0; /* Sin bordes para aprovechar toda la pantalla */
+        height: 85vh; /* Mucho más alto, esto hará que las imágenes se vean "verticales" (tipo historia) */
+    }
     
     .about-container { flex-direction: column; }
     .links-contacto { flex-direction: column; }
-    
     .lightbox-prev { left: 10px; background: rgba(0,0,0,0.5); }
     .lightbox-next { right: 10px; background: rgba(0,0,0,0.5); }
 }
