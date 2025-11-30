@@ -1,93 +1,81 @@
 document.addEventListener('DOMContentLoaded', function() {
     
     // ======================================================
-    // 1. LÓGICA DE MENÚ MÓVIL (CORREGIDO)
+    // 1. LÓGICA DE MENÚ MÓVIL
     // ======================================================
     const menuToggle = document.getElementById('mobile-menu-btn');
     const navMenu = document.getElementById('nav-menu');
+    const navLinks = document.querySelectorAll('.nav-menu a'); 
+
+    function toggleMenu() {
+        navMenu.classList.toggle('active');
+        const icon = menuToggle.querySelector('i');
+        
+        if (navMenu.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    }
 
     if (menuToggle && navMenu) {
-        menuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            // Cambiar ícono de hamburguesa a X (opcional)
-            const icon = menuToggle.querySelector('i');
-            if (icon.classList.contains('fa-bars')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
+        menuToggle.addEventListener('click', toggleMenu);
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
         });
     }
 
     // ======================================================
-    // 2. CARGA AUTOMÁTICA DE IMÁGENES (INTELIGENTE)
+    // 2. CARGA DE IMÁGENES (CANTIDADES FIJAS)
     // ======================================================
-    // Esta función intenta cargar imágenes numeradas hasta que fallan
-    // para que no tengas que actualizar el HTML manualmente.
-    
-    const categories = ['retrato', 'moda', 'sociales', 'producto', 'oficina'];
-    const maxImagesToCheck = 30; // Intentará buscar hasta la imagen número 30 de cada categoría
+    const configuracionImagenes = {
+        'retrato': 15,
+        'moda': 6,
+        'sociales': 6,
+        'producto': 15, 
+        'oficina': 6
+    };
+
     const galeriaGrid = document.querySelector('.galeria-grid');
-    const videoContainer = document.querySelector('.video-container'); // Guardamos referencia al video
+    const videoContainer = document.querySelector('.video-container'); 
 
-    async function loadImagesForCategory(category) {
-        for (let i = 1; i <= maxImagesToCheck; i++) {
-            // Nombre del archivo esperado: ej. retrato1.jpg
-            // NOTA: Para 'producto' tu archivo se llama 'productocom' según el historial.
-            // Ajustamos el prefijo del archivo:
-            let filePrefix = category;
-            if (category === 'producto') filePrefix = 'productocom'; 
+    async function loadImagesForCategory(category, count) {
+        let filePrefix = category;
+        if (category === 'producto') filePrefix = 'productocom'; 
 
+        for (let i = 1; i <= count; i++) {
             const imgSrc = `assets/img/trabajo/${filePrefix}${i}.jpg`;
             
-            // Creamos una promesa para ver si la imagen carga
-            await new Promise((resolve) => {
-                const img = new Image();
-                img.src = imgSrc;
-                
-                img.onload = () => {
-                    // Si la imagen existe, creamos el elemento HTML
-                    const itemDiv = document.createElement('div');
-                    itemDiv.classList.add('galeria-item');
-                    itemDiv.setAttribute('data-category', category);
-                    // Ocultamos inicialmente (el filtro se encargará de mostrarla)
-                    itemDiv.style.display = 'none'; 
-                    
-                    const imgElement = document.createElement('img');
-                    imgElement.src = imgSrc;
-                    imgElement.alt = `${category} ${i}`;
-                    
-                    // Añadimos evento para Lightbox a la nueva imagen
-                    imgElement.addEventListener('click', () => openLightbox(imgElement));
+            const itemDiv = document.createElement('div');
+            itemDiv.classList.add('galeria-item');
+            itemDiv.setAttribute('data-category', category);
+            itemDiv.style.display = 'none'; 
+            
+            const imgElement = document.createElement('img');
+            imgElement.src = imgSrc;
+            imgElement.alt = `${category} ${i}`;
+            imgElement.loading = "lazy";
+            
+            imgElement.addEventListener('click', () => openLightbox(imgElement));
 
-                    itemDiv.appendChild(imgElement);
-                    
-                    // Insertamos ANTES del video para mantener el orden
-                    if (videoContainer) {
-                        galeriaGrid.insertBefore(itemDiv, videoContainer);
-                    } else {
-                        galeriaGrid.appendChild(itemDiv);
-                    }
-                    resolve();
-                };
-                
-                img.onerror = () => {
-                    // Si la imagen no existe, simplemente no hacemos nada y resolvemos
-                    // para seguir el bucle o terminar.
-                    resolve();
-                };
-            });
+            itemDiv.appendChild(imgElement);
+            
+            if (videoContainer) {
+                galeriaGrid.insertBefore(itemDiv, videoContainer);
+            } else {
+                galeriaGrid.appendChild(itemDiv);
+            }
         }
     }
 
-    // Ejecutamos la carga para todas las categorías
-    // Usamos Promise.all para que sea paralelo y rápido
-    Promise.all(categories.map(cat => loadImagesForCategory(cat))).then(() => {
-        console.log("Carga automática de imágenes completada.");
-        // Reiniciamos lógica de filtros si fuera necesario, 
-        // pero como es por CSS/clases y eventos delegados, funcionará.
+    Object.entries(configuracionImagenes).forEach(([category, count]) => {
+        loadImagesForCategory(category, count);
     });
 
 
@@ -97,34 +85,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const filtroBotones = document.querySelectorAll('.filtro-btn');
     const galeriaPlaceholder = document.querySelector('.galeria-placeholder');
     
-    // Variables para lightbox
-    let currentImages = []; // Lista dinámica de imágenes visibles
+    let currentImages = []; 
     let currentImageIndex = 0;
 
     filtroBotones.forEach(boton => {
         boton.addEventListener('click', () => {
-            // Ocultar placeholder
             if (galeriaPlaceholder) galeriaPlaceholder.style.display = 'none';
 
-            // Activar botón
             filtroBotones.forEach(btn => btn.classList.remove('active'));
             boton.classList.add('active');
 
             const filtro = boton.getAttribute('data-filter');
-            
-            // Seleccionamos TODOS los items (incluyendo los nuevos agregados dinámicamente)
             const allItems = document.querySelectorAll('.galeria-item');
             
-            currentImages = []; // Reiniciar lista para lightbox
+            currentImages = []; 
 
             allItems.forEach(item => {
                 if (item.getAttribute('data-category') === filtro) {
-                    item.style.display = 'grid'; // Grid para mantener el aspect-ratio
+                    item.style.display = 'block'; // OJO: Block para que funcione el video y las imagenes
                     
-                    // Si no es video, lo agregamos a la lista de lightbox actual
+                    // Ajuste: si es imagen usamos grid/aspect ratio del CSS, si es video tiene su CSS propio
                     if (!item.classList.contains('video-container')) {
-                        const img = item.querySelector('img');
-                        if(img) currentImages.push(img);
+                       item.style.display = 'grid'; // Mantiene el estilo de las fotos
+                       const img = item.querySelector('img');
+                       if(img) currentImages.push(img);
                     }
                 } else {
                     item.style.display = 'none';
@@ -135,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // ======================================================
-    // 4. LIGHTBOX (Optimizado para usar la lista dinámica)
+    // 4. LIGHTBOX
     // ======================================================
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
@@ -143,11 +127,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const prevBtn = document.querySelector('.lightbox-prev');
     const nextBtn = document.querySelector('.lightbox-next');
 
-    // Función auxiliar para abrir lightbox (usada en la carga dinámica)
     function openLightbox(imgElement) {
         lightbox.style.display = 'flex';
         lightboxImg.src = imgElement.src;
-        // Encontrar índice en la lista filtrada actual
         currentImageIndex = currentImages.findIndex(img => img.src === imgElement.src);
     }
 
@@ -187,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // ======================================================
-    // 5. CARRUSEL (Tiempo ajustado a 3 segundos)
+    // 5. CARRUSEL HERO (PRINCIPAL)
     // ======================================================
     const carouselContainer = document.querySelector('.carousel-container');
     const carouselImages = document.querySelectorAll('.carousel-image');
@@ -197,17 +179,13 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentIndex = 0;
     let isTransitioning = false;
     let autoSlideInterval;
-    
-    // CAMBIO: TIEMPO DE TRANSICIÓN 3 SEGUNDOS
     const slideDuration = 3000; 
     const fadeDuration = 800; 
 
     function goToSlide(index) {
         if (isTransitioning) return;
         isTransitioning = true;
-
         carouselContainer.classList.add('transitioning');
-
         setTimeout(() => {
             carouselImages[currentIndex].classList.remove('active');
             currentIndex = (index + carouselImages.length) % carouselImages.length;
@@ -215,7 +193,6 @@ document.addEventListener('DOMContentLoaded', function() {
             carouselContainer.classList.remove('transitioning');
             isTransitioning = false;
         }, fadeDuration);
-        
         resetAutoSlide();
     }
 
@@ -229,5 +206,36 @@ document.addEventListener('DOMContentLoaded', function() {
         carouselNextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
         carouselImages[0].classList.add('active');
         resetAutoSlide();
+    }
+
+    // ======================================================
+    // 6. CARRUSEL DE VIDEO (PORTFOLIO)
+    // ======================================================
+    const videoSlides = document.querySelectorAll('.video-slide');
+    const vidPrevBtn = document.querySelector('.video-control.prev');
+    const vidNextBtn = document.querySelector('.video-control.next');
+    let currentVideoIndex = 0;
+
+    function showVideo(index) {
+        // Pausar el video actual (si es un iframe de youtube) reiniciando el src
+        const currentIframe = videoSlides[currentVideoIndex].querySelector('iframe');
+        if(currentIframe) {
+            const tempSrc = currentIframe.src;
+            currentIframe.src = tempSrc; 
+        }
+
+        // Ocultar actual
+        videoSlides[currentVideoIndex].classList.remove('active');
+
+        // Calcular nuevo índice
+        currentVideoIndex = (index + videoSlides.length) % videoSlides.length;
+
+        // Mostrar nuevo
+        videoSlides[currentVideoIndex].classList.add('active');
+    }
+
+    if(videoSlides.length > 0) {
+        vidPrevBtn.addEventListener('click', () => showVideo(currentVideoIndex - 1));
+        vidNextBtn.addEventListener('click', () => showVideo(currentVideoIndex + 1));
     }
 });

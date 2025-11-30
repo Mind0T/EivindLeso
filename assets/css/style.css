@@ -60,11 +60,9 @@ header {
 /* ======== HERO BOXED (CARRUSEL) ======== */
 .hero-boxed {
     width: 100%;
-    /* CAMBIO: Padding agregado a los costados (2rem) */
     padding: 0 2rem; 
     height: 95vh; 
     position: relative;
-    /* Centramos el contenido por si acaso */
     display: flex;
     justify-content: center;
 }
@@ -74,7 +72,6 @@ header {
     height: 100%; 
     position: relative; 
     overflow: hidden; 
-    /* Opcional: Borde redondeado sutil para que se vea elegante con el espacio */
     border-radius: 4px; 
 }
 .carousel-image {
@@ -127,15 +124,69 @@ header {
 }
 
 .galeria-item { display: none; overflow: hidden; aspect-ratio: 1 / 1.2; cursor: pointer; }
+
+/* ======== CARRUSEL DE VIDEOS (NUEVO) ======== */
 .galeria-item.video-container {
-    grid-column: 1 / -1; aspect-ratio: 16 / 9; width: 100%; max-width: 900px; margin: 0 auto;
+    grid-column: 1 / -1; 
+    width: 100%; 
+    max-width: 900px; /* Ancho máximo para el video */
+    margin: 0 auto;
+    aspect-ratio: auto; 
+    background: transparent;
+    display: none; /* Se mostrará con JS */
 }
+
+.video-carousel {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* Aspect Ratio 16:9 */
+    background: #000;
+    overflow: hidden;
+}
+
+.video-slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    display: none; /* Ocultos por defecto */
+}
+.video-slide.active {
+    display: block; /* Solo el activo se muestra */
+}
+
+.video-slide iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    border: none;
+    font-size: 2rem;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.3s, color 0.3s;
+}
+.video-control:hover {
+    background: rgba(255,255,255,0.9);
+    color: #000;
+}
+.video-control.prev { left: 0; }
+.video-control.next { right: 0; }
+
 .galeria-item img {
     width: 100%; height: 100%; object-fit: cover;
     transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); filter: grayscale(20%);
 }
 .galeria-item:hover img { transform: scale(1.05); filter: grayscale(0%); }
-.video-container iframe { width: 100%; height: 100%; }
+
 
 /* ======== ABOUT ======== */
 .about-container { display: flex; align-items: center; gap: 4rem; padding: 6rem 2rem; }
@@ -200,14 +251,12 @@ footer { text-align: center; padding: 3rem; background: #000; color: #555; font-
         height: 0; overflow: hidden; transition: height 0.3s ease; flex-direction: column;
     }
     
-    /* FIX MENÚ MÓVIL: Aseguramos que se muestre cuando tenga la clase active */
     .nav-menu.active { height: auto; padding: 2rem 0; border-bottom: 1px solid #333; }
     
     .nav-menu ul { flex-direction: column; align-items: center; gap: 1.5rem; }
     .header-social { border-right: none; padding-right: 0; }
     .menu-toggle { display: block; margin-left: 1rem; }
     
-    /* CAMBIO MÓVIL: Padding lateral también en móvil (1rem) */
     .hero-boxed { 
         padding: 0 1rem; 
         height: 85vh; 
