@@ -275,7 +275,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 ticking = true;
             }
-        }, {passive: true}); // {passive: true} mejora rendimiento de scroll
+        }, {passive: true}); 
 
         btnUp.addEventListener('click', () => {
             const offsetTop = targetSection.getBoundingClientRect().top + window.scrollY - 150; 

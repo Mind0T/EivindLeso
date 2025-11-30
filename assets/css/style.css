@@ -57,15 +57,18 @@ header {
 .header-social a:hover { color: var(--color-hover); }
 .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: #fff; }
 
-/* ======== HERO BOXED ======== */
+/* ======== HERO BOXED (Carrusel) ======== */
 .hero-boxed {
     width: 100%;
     padding: 0 2rem; 
-    height: 95vh; 
+    
+    /* ALTURA AUMENTADA PARA ORDENADOR */
+    height: 100vh;      /* Ocupa el 100% de la altura visible */
+    min-height: 800px;  /* Altura mínima de seguridad */
+    
     position: relative;
     display: flex;
     justify-content: center;
-    /* Evita saltos de layout */
     contain: layout size; 
 }
 
@@ -80,7 +83,6 @@ header {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     opacity: 0; transition: opacity 1s ease-in-out;
     display: block;
-    /* Indica al navegador que esto cambiará */
     will-change: opacity; 
 }
 .carousel-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -163,7 +165,6 @@ header {
 .galeria-item img {
     width: 100%; height: 100%; object-fit: cover;
     transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); filter: grayscale(20%);
-    /* Optimización de GPU */
     will-change: transform, filter;
 }
 .galeria-item:hover img { transform: scale(1.05); filter: grayscale(0%); }
@@ -184,7 +185,6 @@ header {
 
 
 /* ======== ABOUT y CONTACTO (Content Visibility) ======== */
-/* Estas secciones no son críticas para la carga inicial, optimizamos render */
 #sobre-mi, #contacto {
     content-visibility: auto; 
 }
@@ -239,7 +239,7 @@ footer { text-align: center; padding: 3rem; background: #000; color: #555; font-
 .lightbox-prev { left: -60px; }
 .lightbox-next { right: -60px; }
 
-/* ======== RESPONSIVE ======== */
+/* ======== RESPONSIVE (Móvil) ======== */
 @media (max-width: 900px) {
     body { padding-top: 80px; }
     header { height: 80px; padding: 1rem 1.5rem; }
@@ -254,7 +254,9 @@ footer { text-align: center; padding: 3rem; background: #000; color: #555; font-
     .header-social { border-right: none; padding-right: 0; }
     .menu-toggle { display: block; margin-left: 1rem; }
     
-    .hero-boxed { padding: 0 1rem; height: 85vh; }
+    /* Mantenemos altura reducida solo para móvil */
+    .hero-boxed { padding: 0 1rem; height: 85vh; min-height: auto; }
+    
     .about-container { flex-direction: column; }
     .links-contacto { flex-direction: column; }
     .lightbox-prev { left: 10px; background: rgba(0,0,0,0.5); }
