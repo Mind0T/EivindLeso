@@ -1,109 +1,102 @@
-# 📸 Portafolio Fotográfico — *Eivind Leso* (v1.0)
+ # Eivind Leso - Portafolio Fotografía Comercial
 
-[![Deploy with Vercel](https://vercel.com/button)](https://eivindleso.vercel.app/)
+ Este repositorio contiene el código fuente del sitio web profesional de **Eivind Leso**, 
+ enfocado en fotografía comercial, editorial, de producto y retrato.
 
-Sitio web oficial del fotógrafo **Eivind Leso**, desarrollado como una **Single Page Application (SPA)** completamente estática y **100% responsiva**, creada con **HTML, CSS y JavaScript puro (Vanilla JS)**.  
-Diseñada para ser **ligera, rápida y visualmente elegante**, enfocada en la experiencia del usuario.
+ El sitio está construido con **Vanilla JavaScript** (sin frameworks), priorizando el 
+ rendimiento (WPO), la semántica SEO y una experiencia de usuario fluida mediante 
+ cargas asíncronas y manipulación optimizada del DOM.
 
-👉 **Versión en vivo:** [https://eivindleso.vercel.app](https://eivindleso.vercel.app)
+ ---
 
----
+ ## 🚀 Características Técnicas
 
-## 🖼️ Vista Previa
+ ### 1. Rendimiento y Optimización (WPO)
+ - **Carga Diferida (Lazy Loading):** Implementado nativamente en imágenes y iframes.
+ - **DocumentFragment:** El script de carga de galería utiliza fragmentos de memoria para 
+   insertar elementos en el DOM en un solo "reflow", mejorando drásticamente el rendimiento 
+   al renderizar múltiples imágenes.
+ - **Content Visibility:** Uso de `content-visibility: auto` en secciones inferiores (About/Contacto) 
+   para mejorar el tiempo de carga inicial.
+ - **Responsive Images:** Uso de la etiqueta `<picture>` en el carrusel principal para servir 
+   imágenes de distinto tamaño según el dispositivo (Móvil vs Desktop).
 
-![Captura del portafolio de Eivind Leso](./screenshot.png)  
-*Para personalizarla, reemplaza `screenshot.png` con una captura actualizada del sitio.*
+ ### 2. Interfaz de Usuario (UI/UX)
+ - **Sistema de Filtrado:** Galería dinámica que filtra por categorías (Retrato, Moda, Producto, etc.) 
+   sin recargar la página.
+ - **Carrusel Héroe:** Slider principal con transición de desvanecimiento (Fade) y cambio automático.
+ - **Lightbox Personalizado:** Visor de imágenes a pantalla completa con navegación por teclado y botones.
 
----
+ ### 3. Video
+ - **Carrusel de Video Táctil:** Implementación personalizada de swipe (`touchstart`, `touchend`) 
+   para navegar entre videos en dispositivos móviles.
+ - **Gestión de Iframes:** El script detiene la reproducción de los videos automáticamente 
+   cuando el usuario cambia de filtro o navega.
 
-## 🧭 Estructura del Proyecto
+ ---
 
-```bash
-EivindLeso/
-├── index.html              # Estructura principal del sitio
-├── css/
-│   └── style.css           # Hoja de estilos base y responsive
-├── js/
-│   └── script.js           # Interactividad y manipulación del DOM
-├── img/
-│   ├── carrusel/           # Imágenes del carrusel inicial
-│   ├── trabajo/            # Fotografías del portafolio
-│   ├── logo2.png
-│   └── mi-foto.jpg
-└── README.md               # Documentación del proyecto
-```
+ ## 🛠️ Tecnologías Utilizadas
 
----
+ - **HTML5:** Semántico y accesible.
+ - **CSS3:** Variables CSS (`:root`), Flexbox, CSS Grid y Media Queries.
+ - **JavaScript (ES6+):** Lógica modular, Async/Await para carga de recursos y Event Listeners pasivos.
+ - **FontAwesome:** Iconografía vectorial.
 
-## ⚙️ Arquitectura y Decisiones Técnicas
+ ---
 
-### 🧩 JavaScript — *Vanilla JS*
-Se eligió **JavaScript puro** para mantener un rendimiento óptimo y eliminar dependencias innecesarias.  
-Toda la lógica principal se ejecuta tras el evento `DOMContentLoaded` desde `js/script.js`.
+ ## 📂 Estructura del Proyecto
 
-**Características clave:**
-- **🎞️ Filtrado de galería:**  
-  Control dinámico mediante `data-category` para mostrar/ocultar imágenes.
-- **🪶 Lightbox interactivo:**  
-  Permite navegar entre imágenes sin salir del visor, gestionando un array dinámico de la categoría activa.
-- **🔁 Carrusel animado:**  
-  Implementa transiciones suaves con `setTimeout`, `setInterval` y clases CSS (`.active`, `.transitioning`).
+ ```bash
+ .
+ ├── index.html           # Estructura principal
+ ├── assets/
+ │   ├── css/
+ │   │   └── style.css    # Estilos globales y responsivos
+ │   ├── js/
+ │   │   └── script.js    # Lógica de galería, filtros y carruseles
+ │   └── img/
+ │       ├── carrusel/    # Imágenes del slider principal
+ │       ├── trabajo/     # Imágenes de la galería (nombradas por categoría)
+ │       └── general/     # Logos y assets estáticos
+ │
+ └── README.md            # Documentación
+ ```
 
----
+ ---
 
-### 🎨 CSS — *Diseño Moderno y Limpio*
-`style.css` está organizado modularmente y aprovecha características modernas:
+ ## 🔧 Configuración y Personalización
 
-- **Variables CSS (`:root`)** para colores y tipografías globales.  
-- **Flexbox + CSS Grid** para una composición fluida y responsiva.  
-- **Transiciones y animaciones** sutiles (`@keyframes`) que refuerzan la experiencia visual (zoom, fundido, desplazamiento).
+ ### 1. Formulario de Contacto
+ El formulario utiliza **Formspree**. Para conectarlo a tu correo:
+ 1. Ve a `index.html`.
+ 2. Busca la etiqueta `<form action="...">`.
+ 3. Reemplaza la URL `https://formspree.io/f/xovknlbb` con tu propio "endpoint" de Formspree.
 
----
+ ### 2. Añadir Imágenes a la Galería
+ No es necesario tocar el HTML para cada foto.
+ 1. Sube tus fotos a `assets/img/trabajo/`.
+ 2. Nómbralas siguiendo el patrón: `categoriaNumero.jpg` (ej. `retrato1.jpg`, `moda3.jpg`).
+ 3. Abre `assets/js/script.js` y actualiza el objeto `configuracionImagenes`:
+    ```javascript
+    const configuracionImagenes = {
+        'retrato': 15, // Cantidad de fotos que tienes
+        'moda': 6,
+        // ...
+    };
+    ```
 
-### 📬 Formulario de Contacto
-El formulario usa **Formspree** como backend externo, lo que permite enviar correos sin un servidor propio.  
-El endpoint de Formspree recibe y procesa los datos del formulario de forma segura.
+ ---
 
----
+ ## ✒️ Autor
 
-## 🚀 Despliegue y Flujo CI/CD
+ **Eivind Leso**
+ - *Fotografía Comercial & IA Engineering*
+ - [Instagram](https://www.instagram.com/eivindleso)
+ - [YouTube](https://www.youtube.com/@eivindleso)
 
-El sitio está alojado en **Vercel**, integrado directamente con GitHub.
+ ---
 
-- **Despliegue continuo:** Cada `push` en `main` genera automáticamente un nuevo build.  
-- **Atomic Deployments:** Sin tiempo de inactividad; el nuevo sitio se activa solo al finalizar la compilación.  
-- **Preview Deployments:** Cada rama genera una URL temporal para pruebas previas a la fusión.
+ ## 📄 Licencia
 
----
-
-## 🧠 Cómo Ejecutar el Proyecto Localmente
-
-1. **Clona este repositorio:**
-   ```bash
-   git clone https://github.com/Mind0T/EivindLeso.git
-   ```
-2. **Accede al directorio:**
-   ```bash
-   cd EivindLeso
-   ```
-3. **Ejecuta el proyecto:**
-   - Abre `index.html` directamente en tu navegador, **o**
-   - Usa la extensión **Live Server** de VS Code para habilitar recarga automática.
-
----
-
-## 🔮 Mejoras Futuras
-
-- **🖼️ Lazy Loading:** optimizar la carga diferida de imágenes.  
-- **📦 Modularización JS:** refactorización con ES6 Modules.  
-- **💫 Animaciones on-scroll:** añadir efectos suaves al desplazarse.  
-- **🧩 CMS Headless:** integrar un gestor de contenido (p. ej. Contentful o Sanity) para facilitar la actualización del portafolio.
-
----
-
-## 👤 Autor
-
-**Irving Soriano**  
-📂 *Fotografo y estudiante de Ing en Inteligencia Artificial*  
-- GitHub: [@Mind0T](https://github.com/Mind0T)  
-- LinkedIn: [Irving Soriano](https://www.linkedin.com/in/irving-soriano/)
+ Todos los derechos reservados sobre las imágenes mostradas en este portafolio.
+ El código fuente puede ser utilizado con fines educativos.
