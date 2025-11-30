@@ -51,7 +51,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         for (let i = 1; i <= count; i++) {
             const imgSrc = `assets/img/trabajo/${filePrefix}${i}.jpg`;
-            
             const itemDiv = document.createElement('div');
             itemDiv.classList.add('galeria-item');
             itemDiv.setAttribute('data-category', category);
@@ -80,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // ======================================================
-    // 3. FILTROS DE GALERÍA
+    // 3. FILTROS DE GALERÍA & CONTROL DE AUDIO VIDEO
     // ======================================================
     const filtroBotones = document.querySelectorAll('.filtro-btn');
     const galeriaPlaceholder = document.querySelector('.galeria-placeholder');
@@ -88,8 +87,22 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentImages = []; 
     let currentImageIndex = 0;
 
+    // Función para detener videos
+    function stopAllVideos() {
+        const videoIframes = document.querySelectorAll('.video-slide iframe');
+        videoIframes.forEach(iframe => {
+            const tempSrc = iframe.src;
+            iframe.src = tempSrc; // Reiniciar src detiene la reproducción
+        });
+    }
+
     filtroBotones.forEach(boton => {
         boton.addEventListener('click', () => {
+            // DETENER VIDEOS AL CAMBIAR DE CATEGORÍA
+            // Si el botón presionado NO es videos, o incluso si es videos (para resetear), paramos audio
+            // Lo ideal es parar audio si salimos de la categoría video o si cambiamos filtro
+            stopAllVideos();
+
             if (galeriaPlaceholder) galeriaPlaceholder.style.display = 'none';
 
             filtroBotones.forEach(btn => btn.classList.remove('active'));
@@ -102,11 +115,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
             allItems.forEach(item => {
                 if (item.getAttribute('data-category') === filtro) {
-                    item.style.display = 'block'; // OJO: Block para que funcione el video y las imagenes
+                    item.style.display = 'block'; 
                     
-                    // Ajuste: si es imagen usamos grid/aspect ratio del CSS, si es video tiene su CSS propio
                     if (!item.classList.contains('video-container')) {
-                       item.style.display = 'grid'; // Mantiene el estilo de las fotos
+                       item.style.display = 'grid'; 
                        const img = item.querySelector('img');
                        if(img) currentImages.push(img);
                     }
@@ -209,15 +221,26 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ======================================================
-    // 6. CARRUSEL DE VIDEO (PORTFOLIO)
+    // 6. CARRUSEL DE VIDEO (PORTFOLIO) - MEJORADO
     // ======================================================
     const videoSlides = document.querySelectorAll('.video-slide');
-    const vidPrevBtn = document.querySelector('.video-control.prev');
-    const vidNextBtn = document.querySelector('.video-control.next');
+    const vidPrevBtn = document.querySelector('.video-control-btn.prev');
+    const vidNextBtn = document.querySelector('.video-control-btn.next');
+    const vidDotsContainer = document.querySelector('.video-dots');
+    const videoTouchArea = document.getElementById('video-carousel-touch');
     let currentVideoIndex = 0;
 
+    // Actualizar puntos
+    function updateDots() {
+        const dots = document.querySelectorAll('.dot');
+        dots.forEach((dot, idx) => {
+            if (idx === currentVideoIndex) dot.classList.add('active');
+            else dot.classList.remove('active');
+        });
+    }
+
     function showVideo(index) {
-        // Pausar el video actual (si es un iframe de youtube) reiniciando el src
+        // Pausar video anterior
         const currentIframe = videoSlides[currentVideoIndex].querySelector('iframe');
         if(currentIframe) {
             const tempSrc = currentIframe.src;
@@ -232,10 +255,84 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Mostrar nuevo
         videoSlides[currentVideoIndex].classList.add('active');
+        updateDots();
     }
 
+    // Inicializar lógica de videos si existen
     if(videoSlides.length > 0) {
         vidPrevBtn.addEventListener('click', () => showVideo(currentVideoIndex - 1));
         vidNextBtn.addEventListener('click', () => showVideo(currentVideoIndex + 1));
+        
+        // Asignar eventos a los puntos
+        const dots = document.querySelectorAll('.dot');
+        dots.forEach((dot, idx) => {
+            dot.addEventListener('click', () => {
+               // Calculamos diferencia para no rehacer lógica, o llamamos showVideo directo con truco
+               // Mejor: lógica directa
+               if (idx === currentVideoIndex) return;
+               
+               // Pausar actual
+               const currentIframe = videoSlides[currentVideoIndex].querySelector('iframe');
+               if(currentIframe) currentIframe.src = currentIframe.src;
+               
+               videoSlides[currentVideoIndex].classList.remove('active');
+               currentVideoIndex = idx;
+               videoSlides[currentVideoIndex].classList.add('active');
+               updateDots();
+            });
+        });
+
+        // --- LÓGICA DE SWIPE (TACTIL) ---
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        videoTouchArea.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        videoTouchArea.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            // Umbral de sensibilidad (50px)
+            if (touchEndX < touchStartX - 50) {
+                // Deslizó a la izquierda -> Siguiente video
+                showVideo(currentVideoIndex + 1);
+            }
+            if (touchEndX > touchStartX + 50) {
+                // Deslizó a la derecha -> Video anterior
+                showVideo(currentVideoIndex - 1);
+            }
+        }
     }
+
+
+    // ======================================================
+    // 7. BOTÓN FLOTANTE "VOLVER A CATEGORÍAS"
+    // ======================================================
+    const btnUp = document.getElementById('btn-up-trabajo');
+    const targetSection = document.getElementById('seccion-filtros');
+
+    if (btnUp && targetSection) {
+        window.addEventListener('scroll', () => {
+            // Mostrar botón si pasamos el header y entramos en main
+            if (window.scrollY > 300) {
+                btnUp.classList.add('visible');
+            } else {
+                btnUp.classList.remove('visible');
+            }
+        });
+
+        btnUp.addEventListener('click', () => {
+            // Scroll suave hacia los botones de filtro
+            const offsetTop = targetSection.getBoundingClientRect().top + window.scrollY - 150; // Ajuste por el header fijo
+            window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+            });
+        });
+    }
+
 });

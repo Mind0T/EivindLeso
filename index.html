@@ -53,7 +53,7 @@
         <section id="trabajo">
             <div class="container">
                 <h2>Mi Trabajo</h2>
-                <div class="filtros">
+                <div class="filtros" id="seccion-filtros">
                     <button class="filtro-btn active" data-filter="retrato">Retrato</button>
                     <button class="filtro-btn" data-filter="moda">Moda</button>
                     <button class="filtro-btn" data-filter="sociales">Sociales</button>
@@ -68,7 +68,7 @@
                     </div>
 
                     <div class="galeria-item video-container" data-category="videos">
-                        <div class="video-carousel">
+                        <div class="video-carousel" id="video-carousel-touch">
                             <div class="video-slide active">
                                 <iframe src="https://www.youtube.com/embed/oz-Y1dcWf9U" title="Video Portfolio" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
@@ -76,14 +76,24 @@
                             <div class="video-slide">
                                 <iframe src="https://www.youtube.com/embed/joOuCNUqGy4" title="Video Showreel" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
+                        </div>
 
-                            <button class="video-control prev">&#10094;</button>
-                            <button class="video-control next">&#10095;</button>
+                        <div class="video-controls-bar">
+                            <button class="video-control-btn prev">&#10094;</button>
+                            <div class="video-dots">
+                                <span class="dot active"></span>
+                                <span class="dot"></span>
+                            </div>
+                            <button class="video-control-btn next">&#10095;</button>
                         </div>
                     </div>
                     </div>
             </div>
         </section>
+
+        <button id="btn-up-trabajo" class="btn-flotante" aria-label="Volver a categorías">
+            <i class="fas fa-arrow-up"></i>
+        </button>
 
         <section id="sobre-mi">
             <div class="container about-container">
@@ -114,7 +124,7 @@
                     <a href="https://www.instagram.com/eivindleso" target="_blank" class="link-item"><i class="fab fa-instagram"></i> Instagram</a>
                     <a href="https://www.youtube.com/@Synthgraf_IA" target="_blank" class="link-item"><i class="fab fa-youtube"></i> YouTube</a>
                     <a href="https://www.tiktok.com/@d0tm1nd" target="_blank" class="link-item"><i class="fab fa-tiktok"></i> TikTok</a>
-                    <a href="https://wa.me/525583538328?text=Buen%20dia.%20me%20puede%20brindar%20informes%20sobre%3A" target="_blank" class="link-item whatsapp-btn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    <a href="https://wa.me/525583538328?text=Buen%20día,%20me%20puede%20brindar%20informes%20sobre%3A" target="_blank" class="link-item whatsapp-btn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
                 </div>
 
                 <div class="contact-form-container">
