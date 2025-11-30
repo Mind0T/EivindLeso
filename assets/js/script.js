@@ -28,9 +28,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 2. CARGA DE IMÁGENES
+    // 2. CARGA DE IMÁGENES (OPTIMIZADA CON DOCUMENT FRAGMENT)
     const configuracionImagenes = {
-        'retrato': 15, 'moda': 6, 'sociales': 6, 'producto': 15, 'oficina': 6
+        'retrato': 15,
+        'moda': 6,
+        'sociales': 6,
+        'producto': 13, 
+        'oficina': 6
     };
 
     const galeriaGrid = document.querySelector('.galeria-grid');
@@ -39,6 +43,9 @@ document.addEventListener('DOMContentLoaded', function() {
     async function loadImagesForCategory(category, count) {
         let filePrefix = category;
         if (category === 'producto') filePrefix = 'productocom'; 
+
+        // Creamos un fragmento de memoria para no repintar el DOM en cada vuelta
+        const fragment = document.createDocumentFragment();
 
         for (let i = 1; i <= count; i++) {
             const imgSrc = `assets/img/trabajo/${filePrefix}${i}.jpg`;
@@ -50,20 +57,25 @@ document.addEventListener('DOMContentLoaded', function() {
             const imgElement = document.createElement('img');
             imgElement.src = imgSrc;
             imgElement.alt = `${category} ${i}`;
-            imgElement.loading = "lazy";
+            imgElement.loading = "lazy"; // Carga diferida
             
             imgElement.addEventListener('click', () => openLightbox(imgElement));
 
             itemDiv.appendChild(imgElement);
-            
-            if (videoContainer) {
-                galeriaGrid.insertBefore(itemDiv, videoContainer);
-            } else {
-                galeriaGrid.appendChild(itemDiv);
-            }
+            // Añadimos al fragmento
+            fragment.appendChild(itemDiv);
+        }
+
+        // Insertamos todo el bloque de una sola vez
+        if (videoContainer) {
+            galeriaGrid.insertBefore(fragment, videoContainer);
+        } else {
+            galeriaGrid.appendChild(fragment);
         }
     }
 
+    // Usamos Promise.all para cargar configuraciones en paralelo si fuera necesario, 
+    // aunque aquí es síncrono, mantenemos el orden.
     Object.entries(configuracionImagenes).forEach(([category, count]) => {
         loadImagesForCategory(category, count);
     });
@@ -239,23 +251,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let touchStartX = 0;
         let touchEndX = 0;
-        videoTouchArea.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
+        videoTouchArea.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, {passive: true});
         videoTouchArea.addEventListener('touchend', e => {
             touchEndX = e.changedTouches[0].screenX;
             if (touchEndX < touchStartX - 50) showVideo(currentVideoIndex + 1);
             if (touchEndX > touchStartX + 50) showVideo(currentVideoIndex - 1);
-        });
+        }, {passive: true});
     }
 
-    // 7. BOTÓN FLOTANTE
+    // 7. BOTÓN FLOTANTE (OPTIMIZADO CON THROTTLING)
     const btnUp = document.getElementById('btn-up-trabajo');
     const targetSection = document.getElementById('seccion-filtros');
 
     if (btnUp && targetSection) {
+        let ticking = false;
+
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) btnUp.classList.add('visible');
-            else btnUp.classList.remove('visible');
-        });
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    if (window.scrollY > 300) btnUp.classList.add('visible');
+                    else btnUp.classList.remove('visible');
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, {passive: true}); // {passive: true} mejora rendimiento de scroll
+
         btnUp.addEventListener('click', () => {
             const offsetTop = targetSection.getBoundingClientRect().top + window.scrollY - 150; 
             window.scrollTo({ top: offsetTop, behavior: 'smooth' });
