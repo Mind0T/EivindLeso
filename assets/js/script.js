@@ -87,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentImageIndex = 0;
 
     function stopAllVideos() {
+        // Esta función detiene la reproducción de cualquier video activo en el carrusel
         const videoIframes = document.querySelectorAll('.video-slide iframe');
         videoIframes.forEach(iframe => {
             const tempSrc = iframe.src;
@@ -222,10 +223,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // FUNCIÓN showVideo CORREGIDA para evitar problemas de caché
     function showVideo(index) {
-        const currentIframe = videoSlides[currentVideoIndex].querySelector('iframe');
-        if(currentIframe) currentIframe.src = currentIframe.src; 
-
+        // No es necesario recargar el iframe (currentIframe.src = currentIframe.src;), 
+        // ya que el cambio de clase 'active' lo oculta y muestra correctamente.
+        // Esto evita problemas de caché del navegador al navegar.
+        
         videoSlides[currentVideoIndex].classList.remove('active');
         currentVideoIndex = (index + videoSlides.length) % videoSlides.length;
         videoSlides[currentVideoIndex].classList.add('active');
@@ -240,8 +243,9 @@ document.addEventListener('DOMContentLoaded', function() {
         dots.forEach((dot, idx) => {
             dot.addEventListener('click', () => {
                if (idx === currentVideoIndex) return;
-               const currentIframe = videoSlides[currentVideoIndex].querySelector('iframe');
-               if(currentIframe) currentIframe.src = currentIframe.src;
+               
+               // Eliminada la línea de recarga del iframe aquí también.
+               
                videoSlides[currentVideoIndex].classList.remove('active');
                currentVideoIndex = idx;
                videoSlides[currentVideoIndex].classList.add('active');
