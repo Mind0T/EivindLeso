@@ -87,9 +87,10 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentImageIndex = 0;
 
     function stopAllVideos() {
-        // Esta función detiene la reproducción de cualquier video activo en el carrusel
+        // Detiene la reproducción de cualquier video activo en el carrusel de videos al cambiar de filtro
         const videoIframes = document.querySelectorAll('.video-slide iframe');
         videoIframes.forEach(iframe => {
+            // Esto fuerza la detención al recargar el src.
             const tempSrc = iframe.src;
             iframe.src = tempSrc; 
         });
@@ -112,9 +113,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (item.getAttribute('data-category') === filtro) {
                     item.style.display = 'block'; 
                     if (!item.classList.contains('video-container')) {
+                       // Corregido: para las imágenes, el display debe ser 'grid' para la galería
                        item.style.display = 'grid'; 
                        const img = item.querySelector('img');
                        if(img) currentImages.push(img);
+                    } else {
+                       // Asegurarse de que el contenedor de video se muestre si el filtro es 'videos'
+                       item.style.display = 'block'; 
                     }
                 } else {
                     item.style.display = 'none';
@@ -223,28 +228,46 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // FUNCIÓN showVideo CORREGIDA para evitar problemas de caché
-    function showVideo(index) {
-        // No es necesario recargar el iframe (currentIframe.src = currentIframe.src;), 
-        // ya que el cambio de clase 'active' lo oculta y muestra correctamente.
-        // Esto evita problemas de caché del navegador al navegar.
-        
+    // NUEVA FUNCIÓN para detener un video específico
+    function stopVideo(index) {
+        if (videoSlides[index]) {
+            const iframe = videoSlides[index].querySelector('iframe');
+            if (iframe) {
+                // Forzar la recarga del iframe para detener la reproducción.
+                const tempSrc = iframe.src;
+                iframe.src = tempSrc;
+            }
+        }
+    }
+
+    // FUNCIÓN showVideo CORREGIDA para asegurar la detención del video anterior
+    function showVideo(newIndex) {
+        // 1. Detener el video actual ANTES de cambiar el índice de la vista
+        stopVideo(currentVideoIndex);
+
         videoSlides[currentVideoIndex].classList.remove('active');
-        currentVideoIndex = (index + videoSlides.length) % videoSlides.length;
+        
+        // 2. Calcular el nuevo índice
+        currentVideoIndex = (newIndex + videoSlides.length) % videoSlides.length;
+        
+        // 3. Mostrar el nuevo video
         videoSlides[currentVideoIndex].classList.add('active');
         updateDots();
     }
 
     if(videoSlides.length > 0) {
+        // Botones de control
         vidPrevBtn.addEventListener('click', () => showVideo(currentVideoIndex - 1));
         vidNextBtn.addEventListener('click', () => showVideo(currentVideoIndex + 1));
         
+        // Puntos de navegación
         const dots = document.querySelectorAll('.dot');
         dots.forEach((dot, idx) => {
             dot.addEventListener('click', () => {
                if (idx === currentVideoIndex) return;
                
-               // Eliminada la línea de recarga del iframe aquí también.
+               // Detener el video actual antes de cambiar a través de los puntos
+               stopVideo(currentVideoIndex);
                
                videoSlides[currentVideoIndex].classList.remove('active');
                currentVideoIndex = idx;
@@ -253,6 +276,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
+        // Swipe para móvil
         let touchStartX = 0;
         let touchEndX = 0;
         videoTouchArea.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, {passive: true});
