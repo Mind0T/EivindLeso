@@ -1,4 +1,4 @@
-/* ======== CONFIGURACIÓN GENERAL ======== */
+/* ======== CONFIGURACIÓN GENERAL (Eivind Leso) ======== */
 :root {
     --color-fondo: #121212;
     --color-texto: #f0f0f0;
@@ -19,14 +19,13 @@ body {
     line-height: 1.6;
     font-weight: 300;
     padding-top: var(--header-height);
-    /* Mejora de renderizado de texto */
     -webkit-font-smoothing: antialiased;
 }
 
 .container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
 h1, h2, h3 { font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--color-acento); }
 
-/* ======== HEADER ======== */
+/* ======== HEADER (Estilo Eivind Leso) ======== */
 header {
     background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(20,20,20,0.9) 100%);
     position: fixed;
@@ -37,7 +36,6 @@ header {
     border-bottom: none;
     height: var(--header-height);
     text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-    /* Optimización de animaciones */
     will-change: background-color; 
 }
 
@@ -57,55 +55,33 @@ header {
 .header-social a:hover { color: var(--color-hover); }
 .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: #fff; }
 
-/* ======== HERO BOXED (Carrusel) ======== */
+/* ======== HOME & PORTFOLIO STYLES ======== */
 .hero-boxed {
-    width: 100%;
-    padding: 0 2rem; 
-    
-    /* ALTURA AUMENTADA PARA ORDENADOR */
-    height: 100vh;      /* Ocupa el 100% de la altura visible */
-    min-height: 800px;  /* Altura mínima de seguridad */
-    
-    position: relative;
-    display: flex;
-    justify-content: center;
-    contain: layout size; 
+    width: 100%; padding: 0 2rem; height: 100vh; min-height: 800px;
+    position: relative; display: flex; justify-content: center; contain: layout size; 
 }
-
 .carousel-container { 
-    width: 100%; height: 100%; 
-    position: relative; 
-    overflow: hidden; 
-    border-radius: 4px; 
+    width: 100%; height: 100%; position: relative; overflow: hidden; border-radius: 4px; 
 }
-
 .carousel-image {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    opacity: 0; transition: opacity 1s ease-in-out;
-    display: block;
-    will-change: opacity; 
+    opacity: 0; transition: opacity 1s ease-in-out; display: block; will-change: opacity; 
 }
 .carousel-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .carousel-image.active { opacity: 1; }
-
 .carousel-control {
-    position: absolute; top: 50%; transform: translateY(-50%);
-    background: transparent; color: rgba(255,255,255,0.7);
-    border: none; padding: 20px; cursor: pointer; font-size: 3rem;
+    position: absolute; top: 50%; transform: translateY(-50%); background: transparent;
+    color: rgba(255,255,255,0.7); border: none; padding: 20px; cursor: pointer; font-size: 3rem;
     z-index: 10; transition: color 0.3s;
 }
 .carousel-control:hover { color: #fff; transform: translateY(-50%) scale(1.1); }
 .carousel-control.prev { left: 10px; }
 .carousel-control.next { right: 10px; }
 
-/* ======== PORTAFOLIO ======== */
 #trabajo { background-color: var(--color-fondo); padding-top: 4rem; position: relative; }
 #trabajo h2 { text-align: center; margin-bottom: 3rem; font-size: 2rem; }
-
 .filtros {
-    text-align: center; margin-bottom: 3rem;
-    display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem;
-    scroll-margin-top: 150px; 
+    text-align: center; margin-bottom: 3rem; display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem;
 }
 .filtro-btn {
     background: transparent; border: 1px solid #333; color: #888;
@@ -115,80 +91,55 @@ header {
 .filtro-btn:hover, .filtro-btn.active { border-color: var(--color-acento); color: var(--color-acento); }
 
 .galeria-grid {
-    display: grid; 
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px; 
-    position: relative; 
-    min-height: 400px;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; 
+    position: relative; min-height: 400px;
 }
 .galeria-placeholder {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    text-align: center; opacity: 0.4; pointer-events: none;
-    width: 100%;
+    text-align: center; opacity: 0.4; pointer-events: none; width: 100%;
 }
 .galeria-placeholder img { width: 450px; max-width: 90%; margin-bottom: 1rem; filter: invert(0); }
-
 .galeria-item { display: none; overflow: hidden; aspect-ratio: 1 / 1.2; cursor: pointer; }
-
-/* ======== VIDEOS ======== */
 .galeria-item.video-container {
-    grid-column: 1 / -1; width: 100%; max-width: 900px; 
-    margin: 0 auto; aspect-ratio: auto; background: transparent; display: none; 
+    grid-column: 1 / -1; width: 100%; max-width: 900px; margin: 0 auto; aspect-ratio: auto; background: transparent; display: none; 
 }
-
-.video-carousel {
-    position: relative; width: 100%; padding-top: 56.25%; 
-    background: #000; overflow: hidden; margin-bottom: 15px; 
-}
-.video-slide {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; 
-}
+.video-carousel { position: relative; width: 100%; padding-top: 56.25%; background: #000; overflow: hidden; margin-bottom: 15px; }
+.video-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; }
 .video-slide.active { display: block; }
 .video-slide iframe { width: 100%; height: 100%; border: none; }
-
-.video-controls-bar {
-    display: flex; justify-content: center; align-items: center; gap: 20px; padding: 10px;
-}
+.video-controls-bar { display: flex; justify-content: center; align-items: center; gap: 20px; padding: 10px; }
 .video-control-btn {
-    background: transparent; border: 1px solid #333; color: #fff; cursor: pointer;
-    font-size: 1.2rem; padding: 5px 15px; transition: all 0.3s;
+    background: transparent; border: 1px solid #333; color: #fff; cursor: pointer; font-size: 1.2rem; padding: 5px 15px; transition: all 0.3s;
 }
 .video-control-btn:hover { border-color: #fff; background: #333; }
-
 .video-dots { display: flex; gap: 10px; }
 .dot {
-    display: block; width: 10px; height: 10px; background-color: #444;
-    border-radius: 50%; cursor: pointer; transition: background-color 0.3s;
+    display: block; width: 10px; height: 10px; background-color: #444; border-radius: 50%; cursor: pointer; transition: background-color 0.3s;
 }
 .dot.active { background-color: #fff; transform: scale(1.2); }
-
 .galeria-item img {
-    width: 100%; height: 100%; object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); filter: grayscale(20%);
-    will-change: transform, filter;
+    width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); filter: grayscale(20%); will-change: transform, filter;
 }
 .galeria-item:hover img { transform: scale(1.05); filter: grayscale(0%); }
 
-/* ======== BOTÓN FLOTANTE ======== */
 .btn-flotante {
-    position: fixed; bottom: 30px; right: 30px;
-    background-color: #fff; color: #000; border: none;
-    width: 50px; height: 50px; border-radius: 50%;
-    font-size: 1.2rem; cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    z-index: 900; opacity: 0; pointer-events: none;
-    transition: opacity 0.3s, transform 0.3s;
-    display: flex; align-items: center; justify-content: center;
+    position: fixed; bottom: 30px; right: 30px; background-color: #fff; color: #000; border: none; width: 50px; height: 50px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5); z-index: 900; opacity: 0; pointer-events: none; transition: opacity 0.3s, transform 0.3s; display: flex; align-items: center; justify-content: center;
 }
 .btn-flotante.visible { opacity: 1; pointer-events: auto; }
 .btn-flotante:hover { transform: scale(1.1); background-color: #ccc; }
 
+/* SECCIÓN HOME: SERVICIOS CTA */
+.servicios-cta-section { background-color: #0d0d0d; padding: 0; border-top: 1px solid #222; }
+.cta-container { display: flex; align-items: center; gap: 4rem; max-width: 1100px; padding: 4rem 2rem; }
+.cta-image { flex: 1; }
+.cta-image img { width: 100%; height: auto; border-radius: 2px; display: block; object-fit: cover; aspect-ratio: 4/3; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+.cta-content { flex: 1; text-align: left; }
+.cta-content h2 { margin-bottom: 1.5rem; font-size: 2.2rem; }
+.cta-content p { color: #ccc; font-size: 1.2rem; margin-bottom: 3rem; font-weight: 300; }
+.cta-content .btn-enviar { display: inline-block; width: auto; padding: 1rem 3rem; text-decoration: none; font-size: 1rem; letter-spacing: 2px; text-align: center; }
 
-/* ======== ABOUT y CONTACTO (Content Visibility) ======== */
-#sobre-mi, #contacto {
-    content-visibility: auto; 
-}
-
+/* ABOUT & CONTACTO */
+#sobre-mi, #contacto { content-visibility: auto; }
 .about-container { display: flex; align-items: center; gap: 4rem; padding: 6rem 2rem; }
 .about-texto { flex: 1; }
 .about-texto h3 { font-size: 1rem; color: #666; margin-bottom: 1rem; }
@@ -202,49 +153,98 @@ header {
 
 #contacto { background-color: #0a0a0a; text-align: center; padding-bottom: 6rem; }
 .links-contacto { display: flex; justify-content: center; gap: 2rem; margin-top: 3rem; flex-wrap: wrap; }
-.link-item {
-    padding: 1rem 2rem; border: 1px solid #333; text-decoration: none; color: #fff;
-    font-size: 1rem; transition: all 0.3s; display: flex; align-items: center; gap: 10px;
-}
+.link-item { padding: 1rem 2rem; border: 1px solid #333; text-decoration: none; color: #fff; font-size: 1rem; transition: all 0.3s; display: flex; align-items: center; gap: 10px; }
 .link-item:hover { background: #fff; color: #000; border-color: #fff; }
 .link-item.whatsapp-btn { border-color: var(--color-whatsapp); color: var(--color-whatsapp); }
 .link-item.whatsapp-btn:hover { background-color: var(--color-whatsapp); color: #fff; }
 .contact-form-container { max-width: 600px; margin: 4rem auto 0; text-align: left; }
 .form-group label { font-size: 0.9rem; color: #888; margin-bottom: 0.5rem; display: block; }
-.form-group input, .form-group textarea {
-    width: 100%; padding: 1rem; background: #1a1a1a; border: 1px solid #333;
-    color: #fff; font-family: var(--fuente-principal); margin-bottom: 1.5rem;
-}
+.form-group input, .form-group textarea { width: 100%; padding: 1rem; background: #1a1a1a; border: 1px solid #333; color: #fff; font-family: var(--fuente-principal); margin-bottom: 1.5rem; }
 .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #fff; }
-.btn-enviar {
-    width: 100%; padding: 1rem; background: #fff; color: #000; border: none;
-    font-weight: 700; text-transform: uppercase; cursor: pointer; transition: background 0.3s;
-}
+.btn-enviar { width: 100%; padding: 1rem; background: #fff; color: #000; border: none; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: background 0.3s; }
 .btn-enviar:hover { background: #ccc; }
-
 footer { text-align: center; padding: 3rem; background: #000; color: #555; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; }
 
-/* Lightbox */
-.lightbox {
-    display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.95); justify-content: center; align-items: center;
-}
+/* LIGHTBOX */
+.lightbox { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95); justify-content: center; align-items: center; }
 .lightbox-wrapper { position: relative; max-width: 90%; max-height: 90%; }
 .lightbox-contenido { max-width: 100%; max-height: 90vh; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
 .lightbox-cerrar { position: absolute; top: 20px; right: 30px; font-size: 40px; color: #fff; cursor: pointer; }
-.lightbox-prev, .lightbox-next {
-    cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%);
-    padding: 16px; color: white; font-size: 30px; user-select: none;
-}
+.lightbox-prev, .lightbox-next { cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%); padding: 16px; color: white; font-size: 30px; user-select: none; }
 .lightbox-prev { left: -60px; }
 .lightbox-next { right: -60px; }
 
-/* ======== RESPONSIVE (Móvil) ======== */
+/* =========================================================
+   ESTILOS DE LA PÁGINA SERVICIOS (ESTILO EIVIND STREET)
+   ========================================================= */
+.services-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 50px 20px;
+}
+.service-row {
+    display: flex;
+    align-items: center;
+    gap: 80px; 
+    margin-bottom: 150px; 
+    border-bottom: 1px solid #222;
+    padding-bottom: 60px;
+}
+.service-row.reverse {
+    flex-direction: row-reverse;
+}
+.service-row:last-child { border-bottom: none; }
+
+.service-img { flex: 1; }
+.service-img img { width: 100%; height: auto; display: block; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-radius: 2px; }
+
+.service-text { flex: 1; text-align: left; }
+.service-title {
+    font-weight: 100; /* Thin font - clave del estilo Eivind Street */
+    font-size: 3rem;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    color: #fff;
+    letter-spacing: 4px;
+}
+
+.service-subtitle {
+    font-weight: 700; 
+    font-size: 1.2rem;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    color: #ddd;
+    border-left: 3px solid #fff;
+    padding-left: 15px;
+}
+
+.service-list, .service-extras { list-style: none; margin-bottom: 20px; }
+.service-list li, .service-extras li { font-size: 1.1rem; margin-bottom: 8px; color: #bbb; font-weight: 300; }
+.service-price { font-size: 1.3rem; font-weight: 400; color: #fff; margin: 15px 0; }
+.service-buttons { margin-top: 40px; display: flex; gap: 20px; flex-wrap: wrap; }
+
+.btn-folleto {
+    display: inline-block; padding: 12px 25px; text-decoration: none; text-transform: uppercase;
+    font-size: 0.9rem; font-weight: 700; transition: all 0.3s ease; border-radius: 4px;
+    background-color: transparent; border: 1px solid #fff; color: #fff;
+}
+.btn-folleto:hover { background-color: #fff; color: #000; }
+
+.btn-agenda {
+    display: inline-block; padding: 12px 25px; text-decoration: none; text-transform: uppercase;
+    font-size: 0.9rem; font-weight: 700; transition: all 0.3s ease; border-radius: 4px;
+    background-color: var(--btn-green-ws); border: 1px solid var(--btn-green-ws); color: #fff;
+}
+.btn-agenda:hover { background-color: #1ebe57; border-color: #1ebe57; transform: translateY(-2px); }
+.btn-small-link { display: inline-block; margin-left: 10px; font-size: 0.8rem; text-decoration: underline; color: #aaa; transition: color 0.3s; }
+.btn-small-link:hover { color: #fff; }
+
+/* RESPONSIVE MÓVIL (GENERAL) */
 @media (max-width: 900px) {
     body { padding-top: 80px; }
     header { height: 80px; padding: 1rem 1.5rem; }
     .logo img { height: 50px; }
-    
     .nav-menu {
         position: absolute; top: 100%; left: 0; width: 100%; background: #000;
         height: 0; overflow: hidden; transition: height 0.3s ease; flex-direction: column;
@@ -253,12 +253,18 @@ footer { text-align: center; padding: 3rem; background: #000; color: #555; font-
     .nav-menu ul { flex-direction: column; align-items: center; gap: 1.5rem; }
     .header-social { border-right: none; padding-right: 0; }
     .menu-toggle { display: block; margin-left: 1rem; }
-    
-    /* Mantenemos altura reducida solo para móvil */
     .hero-boxed { padding: 0 1rem; height: 85vh; min-height: auto; }
-    
     .about-container { flex-direction: column; }
     .links-contacto { flex-direction: column; }
     .lightbox-prev { left: 10px; background: rgba(0,0,0,0.5); }
     .lightbox-next { right: 10px; background: rgba(0,0,0,0.5); }
+    
+    /* Servicios CTA en Home */
+    .cta-container { flex-direction: column; text-align: center; }
+    .cta-content { text-align: center; }
+
+    /* Servicios Page */
+    .service-row, .service-row.reverse { flex-direction: column; gap: 40px; margin-bottom: 80px; }
+    .service-title { font-size: 2rem; text-align: center; }
+    .service-buttons { justify-content: center; }
 }

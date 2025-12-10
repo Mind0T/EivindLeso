@@ -4,19 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <meta name="description" content="Portafolio de Eivind Leso | Irving Soriano. Fotografía comercial, editorial, producto y retrato en Ciudad de México. Ingeniería e Inteligencia Artificial aplicada a la imagen. Servicios de fotografía profesional.">
-    <meta name="keywords" content="Fotografía, CDMX, Comercial, Producto, Retrato, Street Photography, Eivind Leso, Irving Soriano, eivindleso, irvingsoriano">
-    <meta name="author" content="Eivind Leso | Irving Soriano">
+    <meta name="description" content="Portafolio de Eivind Leso | Irving Soriano. Fotografía comercial, editorial, producto y retrato en Ciudad de México.">
     <title>Eivind Leso | Irving Soriano | Fotografía Comercial</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-
     <link rel="preload" as="image" href="assets/img/carrusel/carru1.jpg" media="(min-width: 769px)">
-    <link rel="preload" as="image" href="assets/img/carrusel/carrumob1.jpg" media="(max-width: 768px)">
-
-    <link rel="stylesheet" href="assets/css/style.css">
     
+    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
 </head>
@@ -25,7 +20,7 @@
     <header>
         <div class="header-left">
             <div class="logo">
-                <a href="#home" aria-label="Ir al inicio">
+                <a href="index.html" aria-label="Ir al inicio">
                     <img src="assets/img/logo2.png" alt="Logotipo Eivind Leso" width="150" height="70">
                 </a>
             </div>
@@ -33,48 +28,45 @@
 
         <nav class="nav-menu" id="nav-menu">
             <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#trabajo">Portafolio</a></li>
-                <li><a href="#sobre-mi">Sobre Mí</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#trabajo">Portafolio</a></li>
+                <li><a href="servicios.html">Servicios</a></li>
+                <li><a href="index.html#sobre-mi">Sobre Mí</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
             </ul>
         </nav>
 
         <div class="header-right">
             <div class="header-social">
-                <a href="https://www.instagram.com/eivindleso" target="_blank" title="Instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.youtube.com/@Synthgraf_IA" target="_blank" title="YouTube" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.instagram.com/eivindleso" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/@Synthgraf_IA" target="_blank"><i class="fab fa-youtube"></i></a>
             </div>
-            <div class="menu-toggle" id="mobile-menu-btn" aria-label="Menú"><i class="fas fa-bars"></i></div>
+            <div class="menu-toggle" id="mobile-menu-btn"><i class="fas fa-bars"></i></div>
         </div>
     </header>
 
     <main>
         <section id="home" class="hero-boxed">
             <div class="carousel-container">
-                
                 <picture class="carousel-image active">
                     <source media="(max-width: 768px)" srcset="assets/img/carrusel/carrumob1.jpg">
-                    <img src="assets/img/carrusel/carru1.jpg" alt="Fotografía estudio 1" fetchpriority="high">
+                    <img src="assets/img/carrusel/carru1.jpg" alt="Fotografía estudio 1">
                 </picture>
-
                 <picture class="carousel-image">
                     <source media="(max-width: 768px)" srcset="assets/img/carrusel/carrumob2.jpg">
                     <img src="assets/img/carrusel/carru2.jpg" alt="Fotografía estudio 2" loading="lazy">
                 </picture>
-
                 <picture class="carousel-image">
                     <source media="(max-width: 768px)" srcset="assets/img/carrusel/carrumob3.jpg">
                     <img src="assets/img/carrusel/carru3.jpg" alt="Fotografía estudio 3" loading="lazy">
                 </picture>
-
                 <picture class="carousel-image">
                     <source media="(max-width: 768px)" srcset="assets/img/carrusel/carrumob4.jpg">
                     <img src="assets/img/carrusel/carru4.jpg" alt="Fotografía estudio 4" loading="lazy">
                 </picture>
                 
-                <button class="carousel-control prev" aria-label="Anterior">&#10094;</button>
-                <button class="carousel-control next" aria-label="Siguiente">&#10095;</button>
+                <button class="carousel-control prev">&#10094;</button>
+                <button class="carousel-control next">&#10095;</button>
             </div>
         </section>
 
@@ -92,35 +84,46 @@
                 
                 <div class="galeria-grid" id="galeria-grid">
                     <div class="galeria-placeholder" id="galeria-placeholder">
-                        <img src="assets/img/logo2.png" alt="Logo Eivind Leso" width="450" height="auto">
+                        <img src="assets/img/logo2.png" alt="Logo Eivind Leso" width="450">
                     </div>
 
                     <div class="galeria-item video-container" data-category="videos">
                         <div class="video-carousel" id="video-carousel-touch">
                             <div class="video-slide active">
-                                <iframe src="https://www.youtube.com/embed/oz-Y1dcWf9U" title="Video Portfolio" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                                <iframe src="https://www.youtube.com/embed/oz-Y1dcWf9U" frameborder="0" allowfullscreen></iframe>
                             </div>
                             <div class="video-slide">
-                                <iframe src="https://www.youtube.com/embed/joOuCNUqGy4" title="Video Showreel" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                                <iframe src="https://www.youtube.com/embed/joOuCNUqGy4" frameborder="0" allowfullscreen></iframe>
                             </div>
                         </div>
-
                         <div class="video-controls-bar">
-                            <button class="video-control-btn prev" aria-label="Video anterior">&#10094;</button>
-                            <div class="video-dots">
-                                <span class="dot active"></span>
-                                <span class="dot"></span>
-                            </div>
-                            <button class="video-control-btn next" aria-label="Video siguiente">&#10095;</button>
+                            <button class="video-control-btn prev">&#10094;</button>
+                            <div class="video-dots"><span class="dot active"></span><span class="dot"></span></div>
+                            <button class="video-control-btn next">&#10095;</button>
                         </div>
                     </div>
-                    </div>
+                </div>
             </div>
         </section>
 
-        <button id="btn-up-trabajo" class="btn-flotante" aria-label="Volver a filtros">
-            <i class="fas fa-arrow-up"></i>
-        </button>
+        <button id="btn-up-trabajo" class="btn-flotante"><i class="fas fa-arrow-up"></i></button>
+
+        <section id="servicios-cta" class="servicios-cta-section">
+            <div class="container cta-container">
+                <div class="cta-image">
+                    <img src="assets/img/servicios.jpg" alt="Servicios Fotográficos Eivind Leso">
+                </div>
+                <div class="cta-content">
+                    <h2>Servicios Profesionales</h2>
+                    <p>
+                        Llevo tu visión al siguiente nivel. Ofrezco sesiones de <strong>retrato</strong>, cobertura de <strong>eventos</strong>, fotografía comercial y diseño de <strong>sitios web</strong> minimalistas.
+                    </p>
+                    <a href="servicios.html" class="btn-enviar">
+                        Ver Servicios y Precios
+                    </a>
+                </div>
+            </div>
+        </section>
 
         <section id="sobre-mi">
             <div class="container about-container">
@@ -184,8 +187,8 @@
         <span class="lightbox-cerrar">&times;</span>
         <div class="lightbox-wrapper">
             <img class="lightbox-contenido" id="lightbox-img" alt="Vista previa">
-            <a class="lightbox-prev" aria-label="Anterior">&#10094;</a>
-            <a class="lightbox-next" aria-label="Siguiente">&#10095;</a>
+            <a class="lightbox-prev">&#10094;</a>
+            <a class="lightbox-next">&#10095;</a>
         </div>
     </div>
 
