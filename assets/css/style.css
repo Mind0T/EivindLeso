@@ -5,6 +5,7 @@
     --color-acento: #ffffff;
     --color-hover: #888888;
     --color-whatsapp: #25D366;
+    --btn-blue-course: #254685; /* Agregado para cursos */
     --fuente-principal: 'Montserrat', sans-serif;
     --header-height: 110px;
 }
@@ -176,13 +177,18 @@ footer { text-align: center; padding: 3rem; background: #000; color: #555; font-
 .lightbox-next { right: -60px; }
 
 /* =========================================================
-   ESTILOS DE LA PÁGINA SERVICIOS
+   ESTILOS DE LA PÁGINA SERVICIOS y CURSOS (INTEGRADOS)
    ========================================================= */
+
+/* Contenedor General Servicios */
 .services-container {
     max-width: 1300px;
     margin: 0 auto;
-    padding: 50px 20px;
+    /* Ajuste de padding para no chocar con el header fijo de Leso */
+    padding: 120px 20px 50px 20px; 
 }
+
+/* Diseño ZigZag (Imagen - Texto) */
 .service-row {
     display: flex;
     align-items: center;
@@ -191,15 +197,18 @@ footer { text-align: center; padding: 3rem; background: #000; color: #555; font-
     border-bottom: 1px solid #222;
     padding-bottom: 60px;
 }
-.service-row.reverse {
+.service-row:last-child { border-bottom: none; }
+
+/* Automáticamente alterna la imagen a la derecha en los pares */
+.service-row:nth-child(even) {
     flex-direction: row-reverse;
 }
-.service-row:last-child { border-bottom: none; }
 
 .service-img { flex: 1; }
 .service-img img { width: 100%; height: auto; display: block; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-radius: 2px; }
 
 .service-text { flex: 1; text-align: left; }
+
 .service-title {
     font-weight: 100; /* Letra delgada (Thin) */
     font-size: 3rem;
@@ -207,6 +216,7 @@ footer { text-align: center; padding: 3rem; background: #000; color: #555; font-
     margin-bottom: 25px;
     color: #fff;
     letter-spacing: 4px;
+    line-height: 1.1;
 }
 
 .service-subtitle {
@@ -223,27 +233,83 @@ footer { text-align: center; padding: 3rem; background: #000; color: #555; font-
 .service-list, .service-extras { list-style: none; margin-bottom: 20px; }
 .service-list li, .service-extras li { font-size: 1.1rem; margin-bottom: 8px; color: #bbb; font-weight: 300; }
 .service-price { font-size: 1.3rem; font-weight: 400; color: #fff; margin: 15px 0; }
+
 .service-buttons { margin-top: 40px; display: flex; gap: 20px; flex-wrap: wrap; }
 
-/* BOTÓN FOLLETO (Borde blanco) */
-.btn-folleto {
+/* Botones Servicios */
+.btn-folleto, .btn-agenda, .btn-download {
     display: inline-block; padding: 12px 25px; text-decoration: none; text-transform: uppercase;
     font-size: 0.9rem; font-weight: 700; transition: all 0.3s ease; border-radius: 4px;
+    cursor: pointer; font-family: inherit;
+}
+
+/* Botón Borde Blanco (Folleto / Descarga) */
+.btn-folleto, .btn-download {
     background-color: transparent; border: 1px solid #fff; color: #fff;
 }
-.btn-folleto:hover { background-color: #fff; color: #000; }
-.btn-folleto i { margin-right: 8px; }
+.btn-folleto:hover, .btn-download:hover { background-color: #fff; color: #000; }
 
-/* BOTÓN AGENDA VERDE */
+/* Botón Acción (WhatsApp) */
 .btn-agenda {
-    display: inline-block; padding: 12px 25px; text-decoration: none; text-transform: uppercase;
-    font-size: 0.9rem; font-weight: 700; transition: all 0.3s ease; border-radius: 4px;
-    background-color: var(--btn-green-ws); border: 1px solid var(--btn-green-ws); color: #fff;
+    background-color: var(--color-whatsapp); border: 1px solid var(--color-whatsapp); color: #fff;
 }
-.btn-agenda:hover { background-color: #1ebe57; border-color: #1ebe57; transform: translateY(-2px); }
+.btn-agenda:hover {
+    background-color: #1ebe57; border-color: #1ebe57; transform: translateY(-2px);
+}
 
-/* RESPONSIVE MÓVIL (GENERAL) */
+/* --- Estilos Específicos para CURSOS --- */
+.syllabus-box {
+    background-color: #1a1a1a;
+    padding: 25px;
+    border-left: 4px solid var(--btn-blue-course);
+    margin: 20px 0;
+    border-radius: 0 5px 5px 0;
+}
+.syllabus-title {
+    font-weight: 700; color: #fff; margin-bottom: 15px; display: block;
+    text-transform: uppercase; font-size: 1rem; letter-spacing: 1px;
+}
+.syllabus-list { list-style: none; padding: 0; }
+.syllabus-list li {
+    margin-bottom: 12px; color: #ccc; font-size: 0.95rem; line-height: 1.5;
+    display: flex; align-items: flex-start; gap: 12px;
+}
+.syllabus-list li i {
+    color: var(--btn-blue-course); margin-top: 4px; font-size: 0.9rem; flex-shrink: 0;
+}
+.syllabus-list li span.syllabus-text { flex: 1; }
+.syllabus-list li strong { color: #fff; font-weight: 600; }
+
+/* Precios Cursos */
+.price-container {
+    margin: 25px 0; padding: 15px; background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px; border: 1px solid #333;
+}
+.price-regular { font-size: 1.1rem; color: #aaa; margin-bottom: 5px; }
+.price-regular span { color: #fff; font-weight: 700; font-size: 1.4rem; }
+.price-promo {
+    font-size: 1.3rem; color: var(--color-whatsapp); font-weight: 700; margin-top: 5px;
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+}
+.price-promo-label { font-size: 0.9rem; font-weight: 400; color: #ccc; }
+
+.course-meta {
+    display: flex; gap: 15px; margin-bottom: 15px; font-size: 0.9rem;
+    color: #aaa; font-weight: 600; text-transform: uppercase; flex-wrap: wrap;
+}
+
+.bio-section {
+    background-color: #0a0a0a; padding: 60px 20px; text-align: center;
+    margin-top: 50px; border-top: 1px solid #222;
+}
+.policies-text {
+    font-size: 0.8rem; color: #666; margin-top: 40px; line-height: 1.6;
+    border-top: 1px solid #333; padding-top: 20px;
+}
+
+/* RESPONSIVE MÓVIL (GENERAL y SERVICIOS) */
 @media (max-width: 900px) {
+    /* Header y General */
     body { padding-top: 80px; }
     header { height: 80px; padding: 1rem 1.5rem; }
     .logo img { height: 50px; }
@@ -260,11 +326,16 @@ footer { text-align: center; padding: 3rem; background: #000; color: #555; font-
     .links-contacto { flex-direction: column; }
     .lightbox-prev { left: 10px; background: rgba(0,0,0,0.5); }
     .lightbox-next { right: 10px; background: rgba(0,0,0,0.5); }
-    
     .cta-container { flex-direction: column; text-align: center; }
     .cta-content { text-align: center; }
 
-    .service-row, .service-row.reverse { flex-direction: column; gap: 40px; margin-bottom: 80px; }
+    /* Servicios y Cursos */
+    .services-container { padding-top: 100px; }
+    .service-row, .service-row:nth-child(even) {
+        flex-direction: column; gap: 40px; margin-bottom: 80px;
+    }
     .service-title { font-size: 2rem; text-align: center; }
+    .service-subtitle { text-align: left; }
     .service-buttons { justify-content: center; }
+    .syllabus-box { padding: 15px; }
 }
