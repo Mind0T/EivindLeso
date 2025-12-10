@@ -1,4 +1,4 @@
-/* ======== CONFIGURACIÓN GENERAL (Eivind Leso) ======== */
+/* ======== CONFIGURACIÓN GENERAL ======== */
 :root {
     --color-fondo: #121212;
     --color-texto: #f0f0f0;
@@ -25,7 +25,7 @@ body {
 .container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
 h1, h2, h3 { font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--color-acento); }
 
-/* ======== HEADER (Estilo Eivind Leso) ======== */
+/* ======== HEADER ======== */
 header {
     background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(20,20,20,0.9) 100%);
     position: fixed;
@@ -55,7 +55,7 @@ header {
 .header-social a:hover { color: var(--color-hover); }
 .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: #fff; }
 
-/* ======== HOME & PORTFOLIO STYLES ======== */
+/* ======== HOME & HERO BOXED ======== */
 .hero-boxed {
     width: 100%; padding: 0 2rem; height: 100vh; min-height: 800px;
     position: relative; display: flex; justify-content: center; contain: layout size; 
@@ -78,6 +78,7 @@ header {
 .carousel-control.prev { left: 10px; }
 .carousel-control.next { right: 10px; }
 
+/* ======== PORTAFOLIO ======== */
 #trabajo { background-color: var(--color-fondo); padding-top: 4rem; position: relative; }
 #trabajo h2 { text-align: center; margin-bottom: 3rem; font-size: 2rem; }
 .filtros {
@@ -128,7 +129,7 @@ header {
 .btn-flotante.visible { opacity: 1; pointer-events: auto; }
 .btn-flotante:hover { transform: scale(1.1); background-color: #ccc; }
 
-/* SECCIÓN HOME: SERVICIOS CTA */
+/* ======== SECCIÓN INVITACIÓN SERVICIOS (EN EL HOME) ======== */
 .servicios-cta-section { background-color: #0d0d0d; padding: 0; border-top: 1px solid #222; }
 .cta-container { display: flex; align-items: center; gap: 4rem; max-width: 1100px; padding: 4rem 2rem; }
 .cta-image { flex: 1; }
@@ -138,7 +139,7 @@ header {
 .cta-content p { color: #ccc; font-size: 1.2rem; margin-bottom: 3rem; font-weight: 300; }
 .cta-content .btn-enviar { display: inline-block; width: auto; padding: 1rem 3rem; text-decoration: none; font-size: 1rem; letter-spacing: 2px; text-align: center; }
 
-/* ABOUT & CONTACTO */
+/* ======== ABOUT y CONTACTO ======== */
 #sobre-mi, #contacto { content-visibility: auto; }
 .about-container { display: flex; align-items: center; gap: 4rem; padding: 6rem 2rem; }
 .about-texto { flex: 1; }
@@ -175,7 +176,7 @@ footer { text-align: center; padding: 3rem; background: #000; color: #555; font-
 .lightbox-next { right: -60px; }
 
 /* =========================================================
-   ESTILOS DE LA PÁGINA SERVICIOS (ESTILO EIVIND STREET)
+   ESTILOS DE LA PÁGINA SERVICIOS
    ========================================================= */
 .services-container {
     max-width: 1300px;
@@ -200,7 +201,7 @@ footer { text-align: center; padding: 3rem; background: #000; color: #555; font-
 
 .service-text { flex: 1; text-align: left; }
 .service-title {
-    font-weight: 100; /* Thin font - clave del estilo Eivind Street */
+    font-weight: 100; /* Letra delgada (Thin) */
     font-size: 3rem;
     text-transform: uppercase;
     margin-bottom: 25px;
@@ -224,21 +225,22 @@ footer { text-align: center; padding: 3rem; background: #000; color: #555; font-
 .service-price { font-size: 1.3rem; font-weight: 400; color: #fff; margin: 15px 0; }
 .service-buttons { margin-top: 40px; display: flex; gap: 20px; flex-wrap: wrap; }
 
+/* BOTÓN FOLLETO (Borde blanco) */
 .btn-folleto {
     display: inline-block; padding: 12px 25px; text-decoration: none; text-transform: uppercase;
     font-size: 0.9rem; font-weight: 700; transition: all 0.3s ease; border-radius: 4px;
     background-color: transparent; border: 1px solid #fff; color: #fff;
 }
 .btn-folleto:hover { background-color: #fff; color: #000; }
+.btn-folleto i { margin-right: 8px; }
 
+/* BOTÓN AGENDA VERDE */
 .btn-agenda {
     display: inline-block; padding: 12px 25px; text-decoration: none; text-transform: uppercase;
     font-size: 0.9rem; font-weight: 700; transition: all 0.3s ease; border-radius: 4px;
     background-color: var(--btn-green-ws); border: 1px solid var(--btn-green-ws); color: #fff;
 }
 .btn-agenda:hover { background-color: #1ebe57; border-color: #1ebe57; transform: translateY(-2px); }
-.btn-small-link { display: inline-block; margin-left: 10px; font-size: 0.8rem; text-decoration: underline; color: #aaa; transition: color 0.3s; }
-.btn-small-link:hover { color: #fff; }
 
 /* RESPONSIVE MÓVIL (GENERAL) */
 @media (max-width: 900px) {
@@ -259,11 +261,9 @@ footer { text-align: center; padding: 3rem; background: #000; color: #555; font-
     .lightbox-prev { left: 10px; background: rgba(0,0,0,0.5); }
     .lightbox-next { right: 10px; background: rgba(0,0,0,0.5); }
     
-    /* Servicios CTA en Home */
     .cta-container { flex-direction: column; text-align: center; }
     .cta-content { text-align: center; }
 
-    /* Servicios Page */
     .service-row, .service-row.reverse { flex-direction: column; gap: 40px; margin-bottom: 80px; }
     .service-title { font-size: 2rem; text-align: center; }
     .service-buttons { justify-content: center; }
